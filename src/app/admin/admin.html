@@ -1,0 +1,1190 @@
+<div class="admin-page">
+
+  <!-- =====================================
+       SIDEBAR
+  ====================================== -->
+
+  <aside class="admin-sidebar">
+
+    <div class="sidebar-brand">
+
+      <a
+        routerLink="/"
+        class="brand-logo"
+      >
+
+        <div class="brand-mark">
+          S
+        </div>
+
+        <div>
+          <strong>
+            Skill<span>Kamao</span>
+          </strong>
+
+          <small>
+            Learn · Practice · Grow
+          </small>
+        </div>
+
+      </a>
+
+    </div>
+
+
+    <div class="sidebar-section-title">
+      MAIN
+    </div>
+
+
+    <nav class="admin-nav">
+
+      <a
+        routerLink="/admin"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </a>
+
+
+      <a
+        routerLink="/admin-courses"
+        routerLinkActive="active"
+      >
+        <span class="nav-icon">▣</span>
+        <span>Courses</span>
+      </a>
+
+
+      <a
+        routerLink="/admin-courses"
+        routerLinkActive="active"
+      >
+        <span class="nav-icon">▤</span>
+        <span>Lessons</span>
+      </a>
+
+
+      <a
+        routerLink="/admin-students"
+        routerLinkActive="active"
+      >
+        <span class="nav-icon">♟</span>
+        <span>Students</span>
+      </a>
+
+
+      <a
+        routerLink="/admin-certificates"
+        routerLinkActive="active"
+      >
+        <span class="nav-icon">♜</span>
+        <span>Certificates</span>
+      </a>
+
+
+      <a routerLink="/roadmaps">
+        <span class="nav-icon">⌁</span>
+        <span>Roadmaps</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-section-title">
+      MANAGEMENT
+    </div>
+
+
+    <nav class="admin-nav">
+
+      <a href="javascript:void(0)">
+        <span class="nav-icon">▥</span>
+        <span>Analytics</span>
+      </a>
+
+
+      <a href="javascript:void(0)">
+        <span class="nav-icon">✉</span>
+        <span>Messages</span>
+      </a>
+
+
+      <a href="javascript:void(0)">
+        <span class="nav-icon">▰</span>
+        <span>Categories</span>
+      </a>
+
+
+      <a href="javascript:void(0)">
+        <span class="nav-icon">★</span>
+        <span>Reviews</span>
+      </a>
+
+
+      <a href="javascript:void(0)">
+        <span class="nav-icon">◇</span>
+        <span>Announcements</span>
+      </a>
+
+
+      <a href="javascript:void(0)">
+        <span class="nav-icon">⚙</span>
+        <span>Website Settings</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-section-title">
+      ACCOUNT
+    </div>
+
+
+    <nav class="admin-nav">
+
+      <a href="javascript:void(0)">
+        <span class="nav-icon">♙</span>
+        <span>Profile</span>
+      </a>
+
+
+      <a href="javascript:void(0)">
+        <span class="nav-icon">♙</span>
+        <span>Admin Users</span>
+      </a>
+
+
+      <button
+        type="button"
+        class="logout-btn"
+        (click)="logout()"
+      >
+        <span class="nav-icon">↪</span>
+        <span>Logout</span>
+      </button>
+
+    </nav>
+
+
+    <div class="pro-card">
+
+      <div class="pro-icon">
+        ♛
+      </div>
+
+      <div>
+
+        <strong>
+          SkillKamao Pro
+        </strong>
+
+        <p>
+          Learn · Build · Earn · Grow
+        </p>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+
+  <!-- =====================================
+       CONTENT
+  ====================================== -->
+
+  <div class="admin-content">
+
+
+    <!-- ===================================
+         TOP NAVBAR
+    ==================================== -->
+
+    <header class="top-navbar">
+
+      <button
+        type="button"
+        class="menu-btn"
+      >
+        ☰
+      </button>
+
+
+      <div class="admin-search">
+
+        <span>
+          ⌕
+        </span>
+
+        <input
+          type="text"
+          placeholder="Search..."
+        >
+
+        <kbd>
+          Ctrl K
+        </kbd>
+
+      </div>
+
+
+      <div class="top-actions">
+
+        <a
+          routerLink="/admin-certificates"
+          class="top-action notification-button"
+          title="Certificate requests"
+        >
+
+          ♧
+
+          @if (pendingCertificates() > 0) {
+
+            <span class="notification-count">
+              {{ pendingCertificates() }}
+            </span>
+
+          }
+
+        </a>
+
+
+        <button
+          type="button"
+          class="top-action"
+          title="Theme"
+        >
+          ☾
+        </button>
+
+
+        <div class="top-profile">
+
+          <div class="top-profile-avatar">
+
+            {{
+              adminName.charAt(0).toUpperCase()
+            }}
+
+          </div>
+
+
+          <div class="top-profile-info">
+
+            <strong>
+              {{ adminName }}
+            </strong>
+
+            <span>
+              Administrator
+            </span>
+
+          </div>
+
+
+          <span class="profile-arrow">
+            ⌄
+          </span>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+
+    <!-- ===================================
+         DASHBOARD CONTENT
+    ==================================== -->
+
+    <main class="dashboard-content">
+
+
+      <!-- PAGE HEADER -->
+
+      <section class="dashboard-heading">
+
+        <div>
+
+          <span class="dashboard-label">
+            ADMIN DASHBOARD
+          </span>
+
+
+          <h1>
+            Welcome back, {{ adminName }}! 👋
+          </h1>
+
+
+          <p>
+            Manage SkillKamao and monitor your platform.
+          </p>
+
+        </div>
+
+
+        <div class="heading-side">
+
+
+          @if (todayLabel()) {
+
+            <div class="date-card">
+
+              <div class="date-icon">
+                ▣
+              </div>
+
+              <div>
+
+                <strong>
+                  {{ todayLabel() }}
+                </strong>
+
+                <span>
+                  Today
+                </span>
+
+              </div>
+
+            </div>
+
+          }
+
+
+          <div class="quote-card">
+
+            <span>
+              ⌁
+            </span>
+
+            <strong>
+              Learn · Practice · Build · Grow
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ===================================
+           LIVE STAT CARDS
+      ==================================== -->
+
+      <section class="stats-grid">
+
+
+        <!-- STUDENTS -->
+
+        <article class="stat-card">
+
+          <div class="stat-top">
+
+            <div class="stat-icon blue">
+              ♟
+            </div>
+
+          </div>
+
+
+          <span class="stat-title">
+            Total Students
+          </span>
+
+
+          @if (loading()) {
+
+            <strong class="stat-number loading-number">
+              ...
+            </strong>
+
+          } @else {
+
+            <strong class="stat-number">
+              {{ totalStudents() }}
+            </strong>
+
+          }
+
+
+          <small>
+            Real database records
+          </small>
+
+        </article>
+
+
+
+        <!-- COURSES -->
+
+        <article class="stat-card">
+
+          <div class="stat-top">
+
+            <div class="stat-icon green">
+              ▣
+            </div>
+
+          </div>
+
+
+          <span class="stat-title">
+            Total Courses
+          </span>
+
+
+          @if (loading()) {
+
+            <strong class="stat-number loading-number">
+              ...
+            </strong>
+
+          } @else {
+
+            <strong class="stat-number">
+              {{ totalCourses() }}
+            </strong>
+
+          }
+
+
+          <small>
+            Real database records
+          </small>
+
+        </article>
+
+
+
+        <!-- PENDING -->
+
+        <article class="stat-card">
+
+          <div class="stat-top">
+
+            <div class="stat-icon orange">
+              ♜
+            </div>
+
+          </div>
+
+
+          <span class="stat-title">
+            Pending Certificates
+          </span>
+
+
+          @if (loading()) {
+
+            <strong class="stat-number loading-number">
+              ...
+            </strong>
+
+          } @else {
+
+            <strong class="stat-number">
+              {{ pendingCertificates() }}
+            </strong>
+
+          }
+
+
+          <small>
+            Waiting for review
+          </small>
+
+        </article>
+
+
+
+        <!-- LESSONS -->
+
+        <article class="stat-card">
+
+          <div class="stat-top">
+
+            <div class="stat-icon purple">
+              ◉
+            </div>
+
+          </div>
+
+
+          <span class="stat-title">
+            Total Lessons
+          </span>
+
+
+          @if (loading()) {
+
+            <strong class="stat-number loading-number">
+              ...
+            </strong>
+
+          } @else {
+
+            <strong class="stat-number">
+              {{ totalLessons() }}
+            </strong>
+
+          }
+
+
+          <small>
+            Real database records
+          </small>
+
+        </article>
+
+      </section>
+
+
+
+      <!-- ===================================
+           DATABASE OVERVIEW
+      ==================================== -->
+
+      <section class="dashboard-middle">
+
+
+        <article class="panel overview-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h2>
+                Platform Overview
+              </h2>
+
+              <p>
+                Live information from SkillKamao database
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="overview-list">
+
+
+            <div class="overview-row">
+
+              <div class="overview-left">
+
+                <span class="overview-icon blue">
+                  ♟
+                </span>
+
+                <div>
+
+                  <strong>
+                    Students
+                  </strong>
+
+                  <small>
+                    Registered student accounts
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <strong class="overview-value">
+                {{ totalStudents() }}
+              </strong>
+
+            </div>
+
+
+
+            <div class="overview-row">
+
+              <div class="overview-left">
+
+                <span class="overview-icon green">
+                  ▣
+                </span>
+
+                <div>
+
+                  <strong>
+                    Courses
+                  </strong>
+
+                  <small>
+                    Courses stored in database
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <strong class="overview-value">
+                {{ totalCourses() }}
+              </strong>
+
+            </div>
+
+
+
+            <div class="overview-row">
+
+              <div class="overview-left">
+
+                <span class="overview-icon purple">
+                  ◉
+                </span>
+
+                <div>
+
+                  <strong>
+                    Lessons
+                  </strong>
+
+                  <small>
+                    Learning lessons
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <strong class="overview-value">
+                {{ totalLessons() }}
+              </strong>
+
+            </div>
+
+
+
+            <div class="overview-row">
+
+              <div class="overview-left">
+
+                <span class="overview-icon orange">
+                  ♜
+                </span>
+
+                <div>
+
+                  <strong>
+                    Approved Certificates
+                  </strong>
+
+                  <small>
+                    Certificates approved by admin
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <strong class="overview-value">
+                {{ completedCertificates() }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- CERTIFICATES -->
+
+        <article class="panel certificate-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h2>
+                Certificates
+              </h2>
+
+              <p>
+                Current certificate status
+              </p>
+
+            </div>
+
+
+            <a
+              routerLink="/admin-certificates"
+              class="view-link"
+            >
+              Manage →
+            </a>
+
+          </div>
+
+
+          <div class="certificate-stats">
+
+
+            <div class="certificate-stat pending">
+
+              <span>
+                Pending
+              </span>
+
+              <strong>
+                {{ pendingCertificates() }}
+              </strong>
+
+            </div>
+
+
+            <div class="certificate-stat approved">
+
+              <span>
+                Approved
+              </span>
+
+              <strong>
+                {{ completedCertificates() }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          @if (
+            pendingCertificates() === 0 &&
+            completedCertificates() === 0
+          ) {
+
+            <div class="empty-small">
+              No certificate records available.
+            </div>
+
+          }
+
+        </article>
+
+      </section>
+
+
+
+      <!-- ===================================
+           RECENT DATABASE RECORDS
+      ==================================== -->
+
+      <section class="dashboard-lower">
+
+
+        <!-- STUDENTS -->
+
+        <article class="panel students-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h2>
+                Recent Students
+              </h2>
+
+              <p>
+                Latest records from students table
+              </p>
+
+            </div>
+
+
+            <a
+              routerLink="/admin-students"
+              class="view-link"
+            >
+              View All →
+            </a>
+
+          </div>
+
+
+          <div class="students-table">
+
+
+            <div class="table-head">
+
+              <span>#</span>
+              <span>Student</span>
+              <span>Email</span>
+              <span>Joined</span>
+              <span>Status</span>
+
+            </div>
+
+
+            @if (studentsLoading()) {
+
+              <div class="empty-state">
+                Loading students...
+              </div>
+
+            }
+
+            @else if (recentStudents().length === 0) {
+
+              <div class="empty-state">
+
+                <strong>
+                  No students found
+                </strong>
+
+                <span>
+                  There are currently no student records.
+                </span>
+
+              </div>
+
+            }
+
+            @else {
+
+              @for (
+                student of recentStudents();
+                track student.id;
+                let i = $index
+              ) {
+
+                <div class="student-row">
+
+                  <span>
+                    {{ i + 1 }}
+                  </span>
+
+
+                  <span class="student-name">
+
+                    <i>
+
+                      {{
+                        student.full_name
+                          ? student.full_name.charAt(0).toUpperCase()
+                          : '?'
+                      }}
+
+                    </i>
+
+
+                    <span>
+                      {{
+                        student.full_name || 'Unnamed student'
+                      }}
+                    </span>
+
+                  </span>
+
+
+                  <span class="email-cell">
+
+                    {{
+                      student.email || '—'
+                    }}
+
+                  </span>
+
+
+                  <span>
+                    {{ formatDate(student.created_at) }}
+                  </span>
+
+
+                  <span class="status active-status">
+                    Registered
+                  </span>
+
+                </div>
+
+              }
+
+            }
+
+          </div>
+
+        </article>
+
+
+
+        <!-- CERTIFICATES -->
+
+        <article class="panel activity-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h2>
+                Recent Certificates
+              </h2>
+
+              <p>
+                Latest certificate records
+              </p>
+
+            </div>
+
+
+            <a
+              routerLink="/admin-certificates"
+              class="view-link"
+            >
+              View All →
+            </a>
+
+          </div>
+
+
+          <div class="activity-list">
+
+
+            @if (certificatesLoading()) {
+
+              <div class="empty-state">
+                Loading certificates...
+              </div>
+
+            }
+
+            @else if (recentCertificates().length === 0) {
+
+              <div class="empty-state">
+
+                <strong>
+                  No certificates found
+                </strong>
+
+                <span>
+                  There are currently no certificate records.
+                </span>
+
+              </div>
+
+            }
+
+            @else {
+
+              @for (
+                certificate of recentCertificates();
+                track certificate.id
+              ) {
+
+                <div class="activity-item">
+
+
+                  <div class="activity-icon orange">
+                    ♜
+                  </div>
+
+
+                  <div class="activity-content">
+
+                    <strong>
+                      {{ certificate.course_name }}
+                    </strong>
+
+                    <p>
+                      Certificate request
+                    </p>
+
+                  </div>
+
+
+                  <div class="activity-right">
+
+                    <span
+                      class="certificate-status"
+                      [class]="getCertificateStatusClass(certificate.status)"
+                    >
+                      {{
+                        getCertificateStatus(
+                          certificate.status
+                        )
+                      }}
+                    </span>
+
+
+                    <small>
+                      {{
+                        formatDate(
+                          certificate.created_at
+                        )
+                      }}
+                    </small>
+
+                  </div>
+
+                </div>
+
+              }
+
+            }
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+
+      <!-- ===================================
+           BOTTOM INFORMATION
+      ==================================== -->
+
+      <section class="bottom-cards">
+
+
+        <!-- CATEGORY -->
+
+        <article class="info-card">
+
+          <div class="info-header">
+
+            <div class="info-title-wrap">
+
+              <span class="info-icon">
+                📚
+              </span>
+
+              <div>
+
+                <h3>
+                  Course Categories
+                </h3>
+
+                <small>
+                  Database information
+                </small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="empty-state category-empty">
+
+            <strong>
+              Category data not available
+            </strong>
+
+            <span>
+              The current courses table does not contain
+              a category field.
+            </span>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- DATABASE STATUS -->
+
+        <article class="info-card system-card">
+
+          <h3>
+            Database Status
+          </h3>
+
+
+          @if (
+            databaseStatus() === 'loading'
+          ) {
+
+            <div class="system-status loading-status">
+
+              <span class="status-light loading-light"></span>
+
+              <div>
+
+                <strong>
+                  Checking database...
+                </strong>
+
+                <small>
+                  Connecting to Supabase
+                </small>
+
+              </div>
+
+            </div>
+
+          }
+
+
+          @else if (
+            databaseStatus() === 'connected'
+          ) {
+
+            <div class="system-status">
+
+              <span class="status-light"></span>
+
+              <div>
+
+                <strong>
+                  Supabase Connected
+                </strong>
+
+                <small>
+                  Live dashboard data loaded successfully.
+                </small>
+
+              </div>
+
+            </div>
+
+          }
+
+
+          @else {
+
+            <div class="system-status error-status">
+
+              <span class="status-light error-light"></span>
+
+              <div>
+
+                <strong>
+                  Database Error
+                </strong>
+
+                <small>
+                  Check browser console for the error.
+                </small>
+
+              </div>
+
+            </div>
+
+          }
+
+        </article>
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+</div>

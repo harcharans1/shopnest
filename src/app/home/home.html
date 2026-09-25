@@ -1,0 +1,1051 @@
+<!-- =====================================================
+     SKILLKAMAO HOME
+===================================================== -->
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+  <div class="hero-glow hero-glow-one"></div>
+  <div class="hero-glow hero-glow-two"></div>
+
+  <div class="hero-container">
+
+    <!-- LEFT CONTENT -->
+
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        <span>💡</span>
+        Learn Skills
+        <b>•</b>
+        Build Future
+      </div>
+
+      <h1>
+        Upgrade Your Skills
+        <br>
+        Build a
+        <span>Better Tomorrow</span>
+      </h1>
+
+      <p class="hero-description">
+        Learn practical skills through easy video lessons,
+        real projects and guided learning. Build confidence,
+        create projects and turn your skills into opportunities.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a
+          routerLink="/skills"
+          class="hero-primary"
+        >
+          <span class="play-icon">▶</span>
+          Start Learning
+          <span>→</span>
+        </a>
+
+        <a
+          routerLink="/courses"
+          class="hero-secondary"
+        >
+          Explore Courses
+          <span>→</span>
+        </a>
+
+      </div>
+
+
+      <!-- LIVE SUPABASE STATS -->
+
+      <div class="hero-stats">
+
+        <div class="hero-stat">
+
+          <strong>
+            {{ totalCourses() }}+
+          </strong>
+
+          <span>
+            Published Courses
+          </span>
+
+        </div>
+
+
+        <div class="hero-stat">
+
+          <strong>
+            {{ totalLessons() }}+
+          </strong>
+
+          <span>
+            Learning Lessons
+          </span>
+
+        </div>
+
+
+        <div class="hero-stat">
+
+          <strong>
+
+            @if (averageRating()) {
+
+              {{ averageRating() }}
+
+              <small>★</small>
+
+            } @else {
+
+              —
+            }
+
+          </strong>
+
+          <span>
+            Average Rating
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT HERO -->
+
+    <div class="hero-visual">
+
+
+      <!-- Floating Skill Card -->
+
+      <div class="floating-skill skill-video">
+
+        <div class="skill-floating-icon purple">
+          Pr
+        </div>
+
+        <div>
+          <strong>
+            Video Editing
+          </strong>
+
+          <span>
+            Creative Skills
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="floating-skill skill-canva">
+
+        <div class="skill-floating-icon cyan">
+          C
+        </div>
+
+        <div>
+          <strong>
+            Canva Design
+          </strong>
+
+          <span>
+            Design Skills
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="floating-skill skill-web">
+
+        <div class="skill-floating-icon orange">
+          &lt;/&gt;
+        </div>
+
+        <div>
+          <strong>
+            Web Development
+          </strong>
+
+          <span>
+            Build Websites
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="floating-skill skill-marketing">
+
+        <div class="skill-floating-icon green">
+          ▥
+        </div>
+
+        <div>
+          <strong>
+            Digital Marketing
+          </strong>
+
+          <span>
+            Grow Online
+          </span>
+        </div>
+
+      </div>
+
+
+      <!-- REAL HERO IMAGE -->
+
+      <div class="hero-image-wrapper">
+
+        <img
+          src="/images/home/hero-student.png"
+          alt="SkillKamao student learning online"
+          class="hero-student-image"
+        >
+
+      </div>
+
+
+      <!-- BOOK STACK -->
+
+      <div class="hero-books">
+
+        <div>
+          CREATE
+        </div>
+
+        <div>
+          LEARN
+        </div>
+
+        <div>
+          GROW
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEATURE STRIP
+===================================================== -->
+
+<section class="feature-wrapper">
+
+  <div class="feature-strip">
+
+
+    <div class="feature">
+
+      <div class="feature-icon purple-bg">
+        🎓
+      </div>
+
+      <div>
+
+        <strong>
+          Expert Content
+        </strong>
+
+        <span>
+          Learn from practical lessons
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon violet-bg">
+        🛠️
+      </div>
+
+      <div>
+
+        <strong>
+          Practical Projects
+        </strong>
+
+        <span>
+          Build real-world projects
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon green-bg">
+        🏅
+      </div>
+
+      <div>
+
+        <strong>
+          Get Certified
+        </strong>
+
+        <span>
+          Showcase your achievements
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="feature">
+
+      <div class="feature-icon blue-bg">
+        ⚡
+      </div>
+
+      <div>
+
+        <strong>
+          Learn Anytime
+        </strong>
+
+        <span>
+          Learn from any device
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     POPULAR COURSES
+===================================================== -->
+
+<section class="main-section courses-section">
+
+  <div class="section-heading-row">
+
+    <div>
+
+      <p class="section-label">
+        POPULAR COURSES
+      </p>
+
+      <h2>
+        Start Learning Popular Skills
+      </h2>
+
+      <p>
+        Explore practical courses and start building
+        skills that can create new opportunities.
+      </p>
+
+    </div>
+
+
+    <a
+      routerLink="/courses"
+      class="view-all"
+    >
+      View All Courses
+      <span>→</span>
+    </a>
+
+  </div>
+
+
+  <!-- LOADING -->
+
+  @if (loading()) {
+
+    <div class="state-box">
+
+      <div class="spinner"></div>
+
+      <h3>
+        Loading courses
+      </h3>
+
+      <p>
+        Getting the latest courses from SkillKamao...
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- ERROR -->
+
+  @else if (errorMessage()) {
+
+    <div class="state-box error-state">
+
+      <div class="state-icon">
+        ⚠️
+      </div>
+
+      <h3>
+        Unable to load courses
+      </h3>
+
+      <p>
+        {{ errorMessage() }}
+      </p>
+
+      <button
+        type="button"
+        (click)="retry()"
+      >
+        Try Again
+      </button>
+
+    </div>
+
+  }
+
+
+  <!-- EMPTY -->
+
+  @else if (getVisibleCourses().length === 0) {
+
+    <div class="state-box">
+
+      <div class="state-icon">
+        📚
+      </div>
+
+      <h3>
+        No published courses yet
+      </h3>
+
+      <p>
+        Published courses from the Admin Dashboard
+        will appear here.
+      </p>
+
+    </div>
+
+  }
+
+
+  <!-- LIVE SUPABASE COURSES -->
+
+  @else {
+
+    <div class="courses-grid">
+
+      @for (
+        course of getVisibleCourses();
+        track course.id
+      ) {
+
+        <article class="course-card">
+
+
+          <!-- COURSE IMAGE -->
+
+          <div class="course-cover">
+
+            <img
+              [src]="getCourseImage(course)"
+              [alt]="course.name"
+              class="course-image"
+            >
+
+            <div class="course-image-overlay"></div>
+
+            <div class="course-duration">
+              ◷ {{ course.duration }}
+            </div>
+
+          </div>
+
+
+          <!-- COURSE BODY -->
+
+          <div class="course-body">
+
+            <span class="course-level">
+              {{ course.level }}
+            </span>
+
+            <h3>
+              {{ course.name }}
+            </h3>
+
+            <p class="course-description">
+              {{ course.description }}
+            </p>
+
+
+            <div class="course-meta">
+
+              <span>
+                {{ getCourseLessons(course.id) }}
+                Lessons
+              </span>
+
+              <span class="rating">
+
+                ⭐
+                {{ formatRating(course.rating) }}
+
+              </span>
+
+            </div>
+
+
+            <a
+              [routerLink]="[
+                '/course-details',
+                course.name
+              ]"
+              class="course-action"
+            >
+
+              Start Learning
+
+              <span>
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+        </article>
+
+      }
+
+    </div>
+
+  }
+
+</section>
+
+
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<section class="main-section category-section">
+
+  <div class="section-heading-row">
+
+    <div>
+
+      <p class="section-label">
+        BROWSE BY CATEGORY
+      </p>
+
+      <h2>
+        Explore Skills by Category
+      </h2>
+
+      <p>
+        Find the right skill for your learning and career goals.
+      </p>
+
+    </div>
+
+
+    <a
+      routerLink="/skills"
+      class="view-all"
+    >
+      Explore Skills
+      <span>→</span>
+    </a>
+
+  </div>
+
+
+  <div class="category-grid">
+
+
+    <a
+      routerLink="/skills"
+      class="category-card"
+    >
+
+      <div class="category-icon video">
+        🎬
+      </div>
+
+      <div>
+
+        <strong>
+          Video Editing
+        </strong>
+
+        <span>
+          Learn & Create
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <a
+      routerLink="/skills"
+      class="category-card"
+    >
+
+      <div class="category-icon canva">
+        🎨
+      </div>
+
+      <div>
+
+        <strong>
+          Canva Design
+        </strong>
+
+        <span>
+          Design Skills
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <a
+      routerLink="/skills"
+      class="category-card"
+    >
+
+      <div class="category-icon web">
+        &lt;/&gt;
+      </div>
+
+      <div>
+
+        <strong>
+          Web Development
+        </strong>
+
+        <span>
+          Build Websites
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <a
+      routerLink="/skills"
+      class="category-card"
+    >
+
+      <div class="category-icon marketing">
+        ▥
+      </div>
+
+      <div>
+
+        <strong>
+          Digital Marketing
+        </strong>
+
+        <span>
+          Grow Online
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <a
+      routerLink="/skills"
+      class="category-card"
+    >
+
+      <div class="category-icon content">
+        ▶
+      </div>
+
+      <div>
+
+        <strong>
+          Content Creation
+        </strong>
+
+        <span>
+          Create Content
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <a
+      routerLink="/skills"
+      class="category-card"
+    >
+
+      <div class="category-icon ai">
+        ✦
+      </div>
+
+      <div>
+
+        <strong>
+          AI Tools
+        </strong>
+
+        <span>
+          Learn AI
+        </span>
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LEARNING JOURNEY
+===================================================== -->
+
+<section class="journey-section">
+
+  <div class="journey-container">
+
+
+    <div class="journey-heading">
+
+      <p>
+        — HOW SKILLKAMAO WORKS —
+      </p>
+
+      <h2>
+        Your Learning Journey
+        <br>
+        in 5 Simple Steps
+      </h2>
+
+    </div>
+
+
+    <div class="journey-grid">
+
+
+      <div class="journey-item">
+
+        <div class="journey-number">
+          1
+        </div>
+
+        <div>
+
+          <strong>
+            Choose a Course
+          </strong>
+
+          <span>
+            Pick a skill and start learning
+            at your own pace.
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="journey-item">
+
+        <div class="journey-number">
+          2
+        </div>
+
+        <div>
+
+          <strong>
+            Learn & Practice
+          </strong>
+
+          <span>
+            Watch lessons and practice
+            what you learn.
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="journey-item">
+
+        <div class="journey-number">
+          3
+        </div>
+
+        <div>
+
+          <strong>
+            Build Projects
+          </strong>
+
+          <span>
+            Turn your knowledge into
+            useful projects.
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="journey-item">
+
+        <div class="journey-number">
+          4
+        </div>
+
+        <div>
+
+          <strong>
+            Get Certified
+          </strong>
+
+          <span>
+            Complete your course and
+            earn your certificate.
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="journey-item">
+
+        <div class="journey-number green">
+          5
+        </div>
+
+        <div>
+
+          <strong>
+            Grow
+          </strong>
+
+          <span>
+            Use your skills to create
+            new opportunities.
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="main-section faq-section">
+
+  <div class="section-heading">
+
+    <p class="section-label">
+      FAQ
+    </p>
+
+    <h2>
+      Frequently Asked Questions
+    </h2>
+
+    <p>
+      Everything you need to know about learning
+      with SkillKamao.
+    </p>
+
+  </div>
+
+
+  <div class="faq-list">
+
+
+    <details class="faq-item">
+
+      <summary>
+
+        <span>
+          Who can learn on SkillKamao?
+        </span>
+
+        <b>
+          +
+        </b>
+
+      </summary>
+
+      <p>
+        SkillKamao is designed for students,
+        beginners, freelancers and anyone who
+        wants to develop practical digital skills.
+      </p>
+
+    </details>
+
+
+    <details class="faq-item">
+
+      <summary>
+
+        <span>
+          Do I need previous experience?
+        </span>
+
+        <b>
+          +
+        </b>
+
+      </summary>
+
+      <p>
+        No. Beginners can start with suitable
+        courses and gradually build their skills.
+      </p>
+
+    </details>
+
+
+    <details class="faq-item">
+
+      <summary>
+
+        <span>
+          Can I learn at my own pace?
+        </span>
+
+        <b>
+          +
+        </b>
+
+      </summary>
+
+      <p>
+        Yes. You can learn lessons according
+        to your own schedule and continue from
+        where you stopped.
+      </p>
+
+    </details>
+
+
+    <details class="faq-item">
+
+      <summary>
+
+        <span>
+          Will I get practical projects?
+        </span>
+
+        <b>
+          +
+        </b>
+
+      </summary>
+
+      <p>
+        Practical projects can be included with
+        courses so you can apply your knowledge
+        and build a useful portfolio.
+      </p>
+
+    </details>
+
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta-wrapper">
+
+  <div class="cta-section">
+
+
+    <div class="cta-icon">
+      🎓
+    </div>
+
+
+    <div class="cta-text">
+
+      <p>
+        READY TO BUILD YOUR FUTURE?
+      </p>
+
+      <h2>
+        Start Learning Today
+      </h2>
+
+      <span>
+        Choose a skill, learn practically and
+        start building your future.
+      </span>
+
+    </div>
+
+
+    <a
+      routerLink="/signup"
+      class="cta-button"
+    >
+
+      Create Free Account
+
+      <span>
+        →
+      </span>
+
+    </a>
+
+  </div>
+
+</section>
