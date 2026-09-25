@@ -14,13 +14,19 @@ export class Navbar implements OnInit, OnDestroy {
   constructor(private router: Router, private cartService: CartService, private wishlistService: WishlistService) {}
 
   ngOnInit(): void {
-    this.subscriptions.push(this.cartService.cart$.subscribe(cart => this.cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)));
-    this.loadWishlistCount();
+    this.subscriptions.push(
+      this.cartService.cart$.subscribe(cart => {
+        this.cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      }),
+      this.wishlistService.wishlist$.subscribe(wishlist => {
+        this.wishlistCount = wishlist.length;
+      })
+    );
   }
 
-  private loadWishlistCount(): void { this.wishlistCount = this.wishlistService.getWishlistCount(); }
-
-  onSearchInput(event: Event): void { this.searchText = (event.target as HTMLInputElement).value; }
+  onSearchInput(event: Event): void {
+    this.searchText = (event.target as HTMLInputElement).value;
+  }
 
   searchProducts(event: Event): void {
     event.preventDefault();
@@ -28,5 +34,7 @@ export class Navbar implements OnInit, OnDestroy {
     this.router.navigate(['/products'], { queryParams: search ? { search } : {} });
   }
 
-  ngOnDestroy(): void { this.subscriptions.forEach(subscription => subscription.unsubscribe()); }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 }
