@@ -1,284 +1,32 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CartService } from '../../../core/services/cart';
+import { WishlistService } from '../../../core/services/wishlist';
 
-import {
-  Router,
-  RouterLink
-} from '@angular/router';
-
-import {
-  Subscription
-} from 'rxjs';
-
-import {
-  CartService
-} from '../../../core/services/cart';
-
-import {
-  WishlistService
-} from '../../../core/services/wishlist';
-
-
-@Component({
-  selector: 'app-navbar',
-
-  standalone: true,
-
-  imports: [
-    RouterLink
-  ],
-
-  templateUrl: './navbar.html',
-
-  styleUrl: './navbar.scss'
-})
-
-
+@Component({ selector: 'app-navbar', standalone: true, imports: [RouterLink], templateUrl: './navbar.html', styleUrl: './navbar.scss' })
 export class Navbar implements OnInit, OnDestroy {
-
-
-  // =========================================
-  // SEARCH
-  // =========================================
-
   searchText = '';
-
-
-  // =========================================
-  // CART
-  // =========================================
-
   cartCount = 0;
-
-
-  // =========================================
-  // WISHLIST
-  // =========================================
-
   wishlistCount = 0;
-
-
-  // =========================================
-  // SUBSCRIPTIONS
-  // =========================================
-
   private subscriptions: Subscription[] = [];
 
-
-
-  // =========================================
-  // CONSTRUCTOR
-  // =========================================
-
-  constructor(
-
-    private router: Router,
-
-    private cartService: CartService,
-
-    private wishlistService: WishlistService
-
-  ) {}
-
-
-
-  // =========================================
-  // INIT
-  // =========================================
+  constructor(private router: Router, private cartService: CartService, private wishlistService: WishlistService) {}
 
   ngOnInit(): void {
-
-    this.loadCartCount();
-
+    this.subscriptions.push(this.cartService.cart$.subscribe(cart => this.cartCount = cart.reduce((sum, item) => sum + item.quantity, 0)));
     this.loadWishlistCount();
-
   }
 
+  private loadWishlistCount(): void { this.wishlistCount = this.wishlistService.getWishlistCount(); }
 
+  onSearchInput(event: Event): void { this.searchText = (event.target as HTMLInputElement).value; }
 
-  // =========================================
-  // CART COUNT
-  // =========================================
-
-  private loadCartCount(): void {
-
-    try {
-
-      const service = this.cartService as any;
-
-
-      /*
-       * Different CartService implementations
-       * can use different methods.
-       */
-
-      if (
-        typeof service.getCartCount === 'function'
-      ) {
-
-        this.cartCount =
-          service.getCartCount();
-
-      }
-
-      else if (
-        typeof service.getCart === 'function'
-      ) {
-
-        const cart =
-          service.getCart();
-
-        this.cartCount =
-          Array.isArray(cart)
-            ? cart.length
-            : 0;
-
-      }
-
-      else {
-
-        this.cartCount = 0;
-
-      }
-
-    }
-
-    catch {
-
-      this.cartCount = 0;
-
-    }
-
-  }
-
-
-
-  // =========================================
-  // WISHLIST COUNT
-  // =========================================
-
-  private loadWishlistCount(): void {
-
-    try {
-
-      const service =
-        this.wishlistService as any;
-
-
-      if (
-        typeof service.getWishlist === 'function'
-      ) {
-
-        const wishlist =
-          service.getWishlist();
-
-
-        this.wishlistCount =
-          Array.isArray(wishlist)
-            ? wishlist.length
-            : 0;
-
-      }
-
-      else if (
-        typeof service.getWishlistCount === 'function'
-      ) {
-
-        this.wishlistCount =
-          service.getWishlistCount();
-
-      }
-
-      else {
-
-        this.wishlistCount = 0;
-
-      }
-
-    }
-
-    catch {
-
-      this.wishlistCount = 0;
-
-    }
-
-  }
-
-
-
-  // =========================================
-  // SEARCH INPUT
-  // =========================================
-
-  onSearchInput(
-    event: Event
-  ): void {
-
-    const input =
-      event.target as HTMLInputElement;
-
-
-    this.searchText =
-      input.value;
-
-  }
-
-
-
-  // =========================================
-  // SEARCH PRODUCTS
-  // =========================================
-
-  searchProducts(
-    event: Event
-  ): void {
-
+  searchProducts(event: Event): void {
     event.preventDefault();
-
-
-    const search =
-      this.searchText.trim();
-
-
-    if (!search) {
-
-      this.router.navigate([
-        '/products'
-      ]);
-
-      return;
-
-    }
-
-
-    this.router.navigate(
-      ['/products'],
-      {
-        queryParams: {
-          search: search
-        }
-      }
-    );
-
+    const search = this.searchText.trim();
+    this.router.navigate(['/products'], { queryParams: search ? { search } : {} });
   }
 
-
-
-  // =========================================
-  // DESTROY
-  // =========================================
-
-  ngOnDestroy(): void {
-
-    this.subscriptions.forEach(
-      subscription =>
-        subscription.unsubscribe()
-    );
-
-  }
-
+  ngOnDestroy(): void { this.subscriptions.forEach(subscription => subscription.unsubscribe()); }
 }
