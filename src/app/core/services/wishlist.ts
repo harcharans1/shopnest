@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Product } from './product';
 
 @Injectable({ providedIn: 'root' })
 export class WishlistService {
   private readonly storageKey = 'shopnest-wishlist';
   private wishlist: Product[] = this.loadWishlist();
+  private wishlistSubject = new BehaviorSubject<Product[]>([...this.wishlist]);
+  wishlist$ = this.wishlistSubject.asObservable();
 
   getWishlist(): Product[] { return [...this.wishlist]; }
 
   addToWishlist(product: Product): void {
-    if (!this.isInWishlist(product.id)) {
-      this.wishlist = [...this.wishlist, product];
-      this.save();
-    }
+    if (this.isInWishlist(product.id)) return;
+    this.wishlist = [...this.wishlist, product];
+    this.save();
   }
 
   removeFromWishlist(productId: number): void {
@@ -21,9 +23,7 @@ export class WishlistService {
   }
 
   toggleWishlist(product: Product): void {
-    this.isInWishlist(product.id)
-      ? this.removeFromWishlist(product.id)
-      : this.addToWishlist(product);
+    this.isInWishlist(product.id) ? this.removeFromWishlist(product.id) : this.addToWishlist(product);
   }
 
   isInWishlist(productId: number): boolean {
@@ -39,6 +39,7 @@ export class WishlistService {
 
   private save(): void {
     try { localStorage.setItem(this.storageKey, JSON.stringify(this.wishlist)); } catch {}
+    this.wishlistSubject.next([...this.wishlist]);
   }
 
   private loadWishlist(): Product[] {
