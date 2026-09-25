@@ -1,1 +1,31 @@
-<p>register works!</p>
+<section class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo">S</div>
+    <span class="eyebrow">SHOPNEST</span>
+    <h1>Create Account</h1>
+    <p class="subtitle">Create your account and start shopping.</p>
+
+    @if (error) { <div class="message error">{{ error }}</div> }
+    @if (success) { <div class="message success">{{ success }}</div> }
+
+    <form (ngSubmit)="register()" #registerForm="ngForm">
+      <label>Email</label>
+      <input type="email" name="email" [(ngModel)]="email" placeholder="you@example.com" autocomplete="email" required />
+
+      <label>Password</label>
+      <input type="password" name="password" [(ngModel)]="password" placeholder="Minimum 6 characters" autocomplete="new-password" required />
+
+      <label>Confirm Password</label>
+      <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" placeholder="Enter password again" autocomplete="new-password" required />
+
+      <button type="submit" [disabled]="loading || registerForm.invalid">
+        {{ loading ? 'Creating Account...' : 'Create Account' }}
+      </button>
+    </form>
+
+    <p class="switch-text">
+      Already have an account?
+      <a routerLink="/login">Login</a>
+    </p>
+  </div>
+</section>
