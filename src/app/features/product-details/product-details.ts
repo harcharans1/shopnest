@@ -1,238 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import {
-  ActivatedRoute,
-  RouterLink
-} from '@angular/router';
-
-import {
-  WishlistService
-} from '../../core/services/wishlist';
-
-import {
-  Product,
-  ProductService
-} from '../../core/services/product';
-
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { WishlistService } from '../../core/services/wishlist';
+import { CartService } from '../../core/services/cart';
+import { Product, ProductService } from '../../core/services/product';
 
 @Component({
-  selector: 'app-product-details',
-
-  standalone: true,
-
-  imports: [
-    CommonModule,
-    RouterLink
-  ],
-
-  templateUrl: './product-details.html',
-
-  styleUrl: './product-details.scss'
+  selector: 'app-product-details', standalone: true,
+  imports: [CommonModule, RouterLink],
+  templateUrl: './product-details.html', styleUrl: './product-details.scss'
 })
-
-
 export class ProductDetails implements OnInit {
-
-
-  // =========================================
-  // PRODUCT
-  // =========================================
-
   product?: Product;
-
-
-  // =========================================
-  // QUANTITY
-  // =========================================
-
   quantity = 1;
-
-
-  // =========================================
-  // SELECTED COLOR
-  // =========================================
-
   selectedColor = '';
 
-
-  // =========================================
-  // CONSTRUCTOR
-  // =========================================
-
   constructor(
-
     private route: ActivatedRoute,
-
+    private router: Router,
     private productService: ProductService,
-
-    private wishlistService: WishlistService
-
+    private wishlistService: WishlistService,
+    private cartService: CartService
   ) {}
 
-
-  // =========================================
-  // INIT
-  // =========================================
-
   ngOnInit(): void {
-
-    const id = Number(
-      this.route.snapshot.paramMap.get('id')
-    );
-
-
-    // Get product
-
-    this.product =
-      this.productService.getProductById(id);
-
-
-    // Select first color
-
-    if (
-      this.product?.colors?.length
-    ) {
-
-      this.selectedColor =
-        this.product.colors[0];
-
-    }
-
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.product = this.productService.getProductById(id);
+    if (this.product?.colors?.length) this.selectedColor = this.product.colors[0];
   }
 
-
-  // =========================================
-  // INCREASE QUANTITY
-  // =========================================
-
-  increaseQuantity(): void {
-
-    this.quantity++;
-
-  }
-
-
-  // =========================================
-  // DECREASE QUANTITY
-  // =========================================
-
-  decreaseQuantity(): void {
-
-    if (this.quantity > 1) {
-
-      this.quantity--;
-
-    }
-
-  }
-
-
-  // =========================================
-  // ADD TO CART
-  // =========================================
+  increaseQuantity(): void { this.quantity++; }
+  decreaseQuantity(): void { if (this.quantity > 1) this.quantity--; }
+  selectColor(color: string): void { this.selectedColor = color; }
 
   addToCart(): void {
-
-    if (!this.product) {
-
-      return;
-
+    if (!this.product || !this.product.inStock) return;
+    for (let i = 0; i < this.quantity; i++) {
+      const { id, name, category, price, oldPrice, rating, reviews, discount, image } = this.product;
+      this.cartService.addToCart({ id, name, category, price, oldPrice: oldPrice ?? price, rating, reviews, discount: discount ?? 0, image });
     }
-
-
-    console.log(
-      'Add to cart:',
-      this.product
-    );
-
-
-    console.log(
-      'Quantity:',
-      this.quantity
-    );
-
-
-    console.log(
-      'Selected Color:',
-      this.selectedColor
-    );
-
-
-    alert(
-      `${this.product.name} added to cart`
-    );
-
+    alert(`${this.product.name} added to cart`);
   }
 
-
-  // =========================================
-  // ADD / REMOVE WISHLIST
-  // =========================================
+  buyNow(): void {
+    if (!this.product || !this.product.inStock) return;
+    this.addToCart();
+    this.router.navigate(['/checkout']);
+  }
 
   toggleWishlist(): void {
-
-    if (!this.product) {
-
-      return;
-
-    }
-
-
-    this.wishlistService
-      .toggleWishlist(this.product);
-
-
-    if (
-      this.isInWishlist()
-    ) {
-
-      alert(
-        `${this.product.name} added to wishlist`
-      );
-
-    } else {
-
-      alert(
-        `${this.product.name} removed from wishlist`
-      );
-
-    }
-
+    if (!this.product) return;
+    this.wishlistService.toggleWishlist(this.product);
   }
-
-
-  // =========================================
-  // CHECK WISHLIST
-  // =========================================
 
   isInWishlist(): boolean {
-
-    if (!this.product) {
-
-      return false;
-
-    }
-
-
-    return this.wishlistService
-      .isInWishlist(
-        this.product.id
-      );
-
+    return !!this.product && this.wishlistService.isInWishlist(this.product.id);
   }
-
-
-  // =========================================
-  // SELECT COLOR
-  // =========================================
-
-  selectColor(
-    color: string
-  ): void {
-
-    this.selectedColor = color;
-
-  }
-
 }
