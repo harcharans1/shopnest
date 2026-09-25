@@ -1,197 +1,64 @@
 <section class="orders-page">
-
   <div class="orders-container">
-
     <div class="orders-header">
-
       <div>
-        <span class="eyebrow">
-          SHOPNEST
-        </span>
-
-        <h1>
-          My Orders
-        </h1>
-
-        <p>
-          Track and manage your recent orders.
-        </p>
+        <span class="eyebrow">SHOPNEST</span>
+        <h1>My Orders</h1>
+        <p>Track and manage your recent orders.</p>
       </div>
-
-      <a
-        routerLink="/products"
-        class="continue-shopping"
-      >
-        Continue Shopping →
-      </a>
-
+      <a routerLink="/products" class="continue-shopping">Continue Shopping →</a>
     </div>
 
-
     @if (orders.length > 0) {
-
       <div class="orders-list">
-
-        @for (
-          order of orders;
-          track $index
-        ) {
-
+        @for (order of orders; track $index) {
           <article class="order-card">
-
             <div class="order-top">
-
               <div>
-
-                <span class="order-label">
-                  ORDER
-                </span>
-
-                <h2>
-                  #{{ order.id || ($index + 1001) }}
-                </h2>
-
+                <span class="order-label">ORDER</span>
+                <h2>#{{ order.id || ($index + 1001) }}</h2>
               </div>
-
-              <span
-                class="status"
-                [class.cancelled]="
-                  order.status === 'Cancelled'
-                "
-              >
+              <span class="status" [class.cancelled]="order.status?.toLowerCase() === 'cancelled'">
                 {{ order.status || 'Placed' }}
               </span>
-
             </div>
-
 
             <div class="order-info">
-
-              <div>
-                <small>
-                  Date
-                </small>
-
-                <strong>
-                  {{ order.createdAt || 'Recently' }}
-                </strong>
-              </div>
-
-              <div>
-                <small>
-                  Total
-                </small>
-
-                <strong>
-                  ₹{{ order.total || 0 | number }}
-                </strong>
-              </div>
-
-              <div>
-                <small>
-                  Items
-                </small>
-
-                <strong>
-                  {{ order.items?.length || 0 }}
-                </strong>
-              </div>
-
+              <div><small>Date</small><strong>{{ order.createdAt || order.created_at || 'Recently' }}</strong></div>
+              <div><small>Total</small><strong>₹{{ order.total || order.total_amount || 0 | number }}</strong></div>
+              <div><small>Items</small><strong>{{ getItems(order).length }}</strong></div>
             </div>
 
-
-            @if (order.items?.length) {
-
+            @if (getItems(order).length) {
               <div class="order-items">
-
-                @for (
-                  item of order.items;
-                  track $index
-                ) {
-
+                @for (item of getItems(order); track $index) {
                   <div class="order-item">
-
-                    <img
-                      [src]="item.image"
-                      [alt]="item.name"
-                    />
-
+                    <img [src]="item.image" [alt]="item.name || item.product_name" />
                     <div class="item-content">
-
-                      <h3>
-                        {{ item.name }}
-                      </h3>
-
-                      <p>
-                        Qty: {{ item.quantity || 1 }}
-                      </p>
-
-                      <strong>
-                        ₹{{ item.price || 0 | number }}
-                      </strong>
-
+                      <h3>{{ item.name || item.product_name }}</h3>
+                      <p>Qty: {{ item.quantity || 1 }}</p>
+                      <strong>₹{{ item.price || 0 | number }}</strong>
                     </div>
-
                   </div>
-
                 }
-
               </div>
-
             }
 
-
             <div class="order-actions">
-
-              @if (
-                order.status !== 'Cancelled'
-              ) {
-
-                <button
-                  type="button"
-                  class="cancel-btn"
-                  (click)="cancelOrder($index)"
-                >
-                  Cancel Order
-                </button>
-
+              @if (order.status?.toLowerCase() !== 'cancelled') {
+                <button type="button" class="cancel-btn" (click)="cancelOrder($index)">Cancel Order</button>
               }
-
             </div>
-
           </article>
-
         }
-
       </div>
-
     } @else {
-
       <div class="empty-orders">
-
-        <div class="empty-icon">
-          📦
-        </div>
-
-        <h2>
-          No Orders Yet
-        </h2>
-
-        <p>
-          Your placed orders will appear here.
-        </p>
-
-        <a
-          routerLink="/products"
-          class="shop-btn"
-        >
-          Start Shopping →
-        </a>
-
+        <div class="empty-icon">📦</div>
+        <h2>No Orders Yet</h2>
+        <p>Your placed orders will appear here.</p>
+        <a routerLink="/products" class="shop-btn">Start Shopping →</a>
       </div>
-
     }
-
   </div>
-
 </section>
