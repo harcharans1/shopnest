@@ -2,12 +2,11 @@
 
   <div class="orders-container">
 
-    <header class="orders-header">
+    <div class="orders-header">
 
       <div>
-
         <span class="eyebrow">
-          SHOPNEST ACCOUNT
+          SHOPNEST
         </span>
 
         <h1>
@@ -15,117 +14,27 @@
         </h1>
 
         <p>
-          Track and manage your ShopNest purchases.
+          Track and manage your recent orders.
         </p>
-
       </div>
-
 
       <a
         routerLink="/products"
-        class="shop-button">
-
+        class="continue-shopping"
+      >
         Continue Shopping →
-
       </a>
 
-    </header>
+    </div>
 
 
-    @if (loading) {
-
-      <div class="state-card">
-
-        <div class="loader">
-          ⏳
-        </div>
-
-        <h2>
-          Loading your orders...
-        </h2>
-
-        <p>
-          Please wait a moment.
-        </p>
-
-      </div>
-
-    }
-
-
-    @if (!loading && error) {
-
-      <div class="state-card error-state">
-
-        <div class="state-icon">
-          🔐
-        </div>
-
-        <h2>
-          Login Required
-        </h2>
-
-        <p>
-          {{ error }}
-        </p>
-
-        <a
-          routerLink="/auth"
-          class="primary-button">
-
-          Login / Register →
-
-        </a>
-
-      </div>
-
-    }
-
-
-    @if (
-      !loading &&
-      !error &&
-      orders.length === 0
-    ) {
-
-      <div class="state-card">
-
-        <div class="state-icon">
-          📦
-        </div>
-
-        <h2>
-          No Orders Yet
-        </h2>
-
-        <p>
-          You haven't placed any orders yet.
-        </p>
-
-        <a
-          routerLink="/products"
-          class="primary-button">
-
-          Start Shopping →
-
-        </a>
-
-      </div>
-
-    }
-
-
-    @if (
-      !loading &&
-      !error &&
-      orders.length > 0
-    ) {
+    @if (orders.length > 0) {
 
       <div class="orders-list">
 
         @for (
           order of orders;
-          track trackByOrder($index, order)
+          track $index
         ) {
 
           <article class="order-card">
@@ -135,22 +44,22 @@
               <div>
 
                 <span class="order-label">
-                  ORDER ID
+                  ORDER
                 </span>
 
                 <h2>
-                  #{{ order.id }}
+                  #{{ order.id || ($index + 1001) }}
                 </h2>
 
               </div>
 
-
               <span
                 class="status"
-                [class]="getStatusClass(order.status)">
-
-                {{ order.status }}
-
+                [class.cancelled]="
+                  order.status === 'Cancelled'
+                "
+              >
+                {{ order.status || 'Placed' }}
               </span>
 
             </div>
@@ -159,41 +68,33 @@
             <div class="order-info">
 
               <div>
-
-                <span>
-                  ORDER DATE
-                </span>
+                <small>
+                  Date
+                </small>
 
                 <strong>
-                  {{ formatDate(order.created_at) }}
+                  {{ order.createdAt || 'Recently' }}
                 </strong>
-
               </div>
 
-
               <div>
-
-                <span>
-                  PAYMENT
-                </span>
+                <small>
+                  Total
+                </small>
 
                 <strong>
-                  {{ order.payment_method || 'COD' }}
+                  ₹{{ order.total || 0 | number }}
                 </strong>
-
               </div>
 
-
               <div>
-
-                <span>
-                  TOTAL
-                </span>
+                <small>
+                  Items
+                </small>
 
                 <strong>
-                  ₹{{ order.total_amount | number }}
+                  {{ order.items?.length || 0 }}
                 </strong>
-
               </div>
 
             </div>
@@ -210,40 +111,26 @@
 
                   <div class="order-item">
 
-                    @if (item.image) {
+                    <img
+                      [src]="item.image"
+                      [alt]="item.name"
+                    />
 
-                      <img
-                        [src]="item.image"
-                        [alt]="item.name">
-
-                    } @else {
-
-                      <div class="item-placeholder">
-                        🛍️
-                      </div>
-
-                    }
-
-
-                    <div class="item-details">
+                    <div class="item-content">
 
                       <h3>
                         {{ item.name }}
                       </h3>
 
-                      <span>
-                        Qty: {{ item.quantity }}
-                      </span>
+                      <p>
+                        Qty: {{ item.quantity || 1 }}
+                      </p>
+
+                      <strong>
+                        ₹{{ item.price || 0 | number }}
+                      </strong>
 
                     </div>
-
-
-                    <strong>
-                      ₹{{
-                        item.price * item.quantity
-                        | number
-                      }}
-                    </strong>
 
                   </div>
 
@@ -254,21 +141,52 @@
             }
 
 
-            <div class="order-bottom">
+            <div class="order-actions">
 
-              <span>
-                Delivery: {{ order.shipping_address }}
-              </span>
+              @if (
+                order.status !== 'Cancelled'
+              ) {
 
-              <strong>
-                ₹{{ order.total_amount | number }}
-              </strong>
+                <button
+                  type="button"
+                  class="cancel-btn"
+                  (click)="cancelOrder($index)"
+                >
+                  Cancel Order
+                </button>
+
+              }
 
             </div>
 
           </article>
 
         }
+
+      </div>
+
+    } @else {
+
+      <div class="empty-orders">
+
+        <div class="empty-icon">
+          📦
+        </div>
+
+        <h2>
+          No Orders Yet
+        </h2>
+
+        <p>
+          Your placed orders will appear here.
+        </p>
+
+        <a
+          routerLink="/products"
+          class="shop-btn"
+        >
+          Start Shopping →
+        </a>
 
       </div>
 
