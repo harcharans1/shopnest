@@ -1,115 +1,62 @@
-import { Injectable } from '@angular/core';
-import { SupabaseService } from '../../core/services/supabase';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
-export interface OrderItem {
-  id: number;
-  productId: number;
-  name: string;
-  image: string;
-  price: number;
-  quantity: number;
-  total: number;
-}
-
-export interface Order {
-  id: string | number;
-  userId?: string;
-  items: OrderItem[];
-  total: number;
-  status: string;
-  createdAt: string;
-}
-
-@Injectable({
-  providedIn: 'root'
+@Component({
+  selector: 'app-orders',
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink
+  ],
+  templateUrl: './orders.html',
+  styleUrl: './orders.scss'
 })
-export class OrderService {
+export class Orders implements OnInit {
 
-  constructor(
-    private supabase: SupabaseService
-  ) {}
+  orders: any[] = [];
 
-  async getOrders(): Promise<Order[]> {
-    try {
-      const { data, error } = await this.supabase.client
-        .from('orders')
-        .select('*')
-        .order('created_at', { ascending: false });
+  ngOnInit(): void {
 
-      if (error) {
-        console.error('Get orders error:', error);
-        return [];
+    const savedOrders =
+      localStorage.getItem('shopnest-orders');
+
+    if (savedOrders) {
+
+      try {
+
+        this.orders =
+          JSON.parse(savedOrders);
+
+      } catch {
+
+        this.orders = [];
+
       }
 
-      return (data ?? []) as Order[];
-
-    } catch (error) {
-      console.error('Orders error:', error);
-      return [];
     }
+
   }
 
-  async getOrderById(id: string | number): Promise<Order | null> {
-    try {
-      const { data, error } = await this.supabase.client
-        .from('orders')
-        .select('*')
-        .eq('id', id)
-        .maybeSingle();
+  cancelOrder(index: number): void {
 
-      if (error) {
-        console.error('Get order error:', error);
-        return null;
-      }
+    const confirmed =
+      confirm(
+        'Are you sure you want to cancel this order?'
+      );
 
-      return data as Order | null;
-
-    } catch (error) {
-      console.error('Order details error:', error);
-      return null;
+    if (!confirmed) {
+      return;
     }
+
+    this.orders[index].status =
+      'Cancelled';
+
+    localStorage.setItem(
+      'shopnest-orders',
+      JSON.stringify(this.orders)
+    );
+
   }
 
-  async createOrder(order: Partial<Order>): Promise<Order | null> {
-    try {
-      const { data, error } = await this.supabase.client
-        .from('orders')
-        .insert(order)
-        .select()
-        .single();
-
-      if (error) {
-        console.error('Create order error:', error);
-        return null;
-      }
-
-      return data as Order;
-
-    } catch (error) {
-      console.error('Create order error:', error);
-      return null;
-    }
-  }
-
-  async cancelOrder(id: string | number): Promise<boolean> {
-    try {
-      const { error } = await this.supabase.client
-        .from('orders')
-        .update({
-          status: 'cancelled'
-        })
-        .eq('id', id);
-
-      if (error) {
-        console.error('Cancel order error:', error);
-        return false;
-      }
-
-      return true;
-
-    } catch (error) {
-      console.error('Cancel order error:', error);
-      return false;
-    }
-  }
 }
