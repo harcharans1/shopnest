@@ -16,13 +16,14 @@
       </form>
 
       <div class="nav-actions">
-        <a routerLink="/products" class="account-action" aria-label="Account">
+        <a routerLink="/account" class="account-action" aria-label="Account">
           <span class="action-icon">👤</span>
           <span class="action-content"><small>Welcome</small><strong>Account</strong></span>
         </a>
         <a routerLink="/wishlist" class="wishlist-action" aria-label="Wishlist">
           <span class="heart">{{ wishlistCount > 0 ? '♥' : '♡' }}</span>
           <span class="action-label">Wishlist</span>
+          @if (wishlistCount > 0) { <span class="cart-badge">{{ wishlistCount }}</span> }
         </a>
         <a routerLink="/cart" class="cart-action" aria-label="Shopping cart">
           <span class="cart-icon">🛒</span>
@@ -39,7 +40,7 @@
       <a routerLink="/products" [queryParams]="{category:'Mobiles'}">Mobiles</a>
       <a routerLink="/products" [queryParams]="{category:'Fashion'}">Fashion</a>
       <a routerLink="/products" [queryParams]="{category:'Electronics'}">Electronics</a>
-      <a routerLink="/products" [queryParams]="{category:'Home'}">Home & Kitchen</a>
+      <a routerLink="/products" [queryParams]="{category:'Home'}">Home &amp; Kitchen</a>
       <a routerLink="/products" [queryParams]="{category:'Beauty'}">Beauty</a>
       <a routerLink="/products" [queryParams]="{category:'Grocery'}">Grocery</a>
       <a routerLink="/products" [queryParams]="{category:'Sports'}">Sports</a>
