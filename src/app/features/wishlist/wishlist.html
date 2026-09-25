@@ -1,0 +1,206 @@
+<section class="wishlist-page">
+
+  <div class="wishlist-container">
+
+    <!-- HEADER -->
+
+    <div class="wishlist-header">
+
+      <div>
+
+        <span class="eyebrow">
+          YOUR COLLECTION
+        </span>
+
+        <h1>
+          My Wishlist
+        </h1>
+
+        <p>
+          Save your favourite products and shop them whenever you want.
+        </p>
+
+      </div>
+
+
+      @if (wishlist.length > 0) {
+
+        <button
+          class="clear-button"
+          (click)="clearWishlist()">
+
+          Clear Wishlist
+
+        </button>
+
+      }
+
+    </div>
+
+
+    <!-- EMPTY -->
+
+    @if (wishlist.length === 0) {
+
+      <div class="empty-wishlist">
+
+        <div class="empty-icon">
+          ♡
+        </div>
+
+        <h2>
+          Your Wishlist is Empty
+        </h2>
+
+        <p>
+          You haven't added any products to your wishlist yet.
+        </p>
+
+        <a
+          routerLink="/products"
+          class="shop-button">
+
+          Explore Products →
+
+        </a>
+
+      </div>
+
+    }
+
+
+    <!-- PRODUCTS -->
+
+    @if (wishlist.length > 0) {
+
+      <div class="wishlist-count">
+
+        {{ wishlist.length }}
+
+        @if (wishlist.length === 1) {
+          Product
+        } @else {
+          Products
+        }
+
+        Saved
+
+      </div>
+
+
+      <div class="wishlist-grid">
+
+        @for (
+          product of wishlist;
+          track trackProduct($index, product)
+        ) {
+
+          <article class="wishlist-card">
+
+            <!-- IMAGE -->
+
+            <a
+              class="product-image"
+              [routerLink]="[
+                '/products',
+                product.id
+              ]">
+
+              @if (product.badge) {
+
+                <span class="badge">
+                  {{ product.badge }}
+                </span>
+
+              }
+
+              <img
+                [src]="product.image"
+                [alt]="product.name">
+
+            </a>
+
+
+            <!-- CONTENT -->
+
+            <div class="product-content">
+
+              <span class="category">
+                {{ product.category }}
+              </span>
+
+              <h2>
+                {{ product.name }}
+              </h2>
+
+
+              <div class="rating">
+
+                <span>
+                  ★ {{ product.rating }}
+                </span>
+
+                <small>
+                  ({{ product.reviews }})
+                </small>
+
+              </div>
+
+
+              <div class="price">
+
+                <strong>
+                  ₹{{ product.price | number }}
+                </strong>
+
+                @if (product.oldPrice) {
+
+                  <del>
+                    ₹{{ product.oldPrice | number }}
+                  </del>
+
+                }
+
+              </div>
+
+
+              <div class="card-actions">
+
+                <a
+                  [routerLink]="[
+                    '/products',
+                    product.id
+                  ]"
+                  class="view-button">
+
+                  View Product
+
+                </a>
+
+
+                <button
+                  class="remove-button"
+                  (click)="
+                    removeProduct(product.id)
+                  "
+                  title="Remove from wishlist">
+
+                  ♡
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

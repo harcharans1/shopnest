@@ -1,0 +1,279 @@
+<section class="orders-page">
+
+  <div class="orders-container">
+
+    <header class="orders-header">
+
+      <div>
+
+        <span class="eyebrow">
+          SHOPNEST ACCOUNT
+        </span>
+
+        <h1>
+          My Orders
+        </h1>
+
+        <p>
+          Track and manage your ShopNest purchases.
+        </p>
+
+      </div>
+
+
+      <a
+        routerLink="/products"
+        class="shop-button">
+
+        Continue Shopping →
+
+      </a>
+
+    </header>
+
+
+    @if (loading) {
+
+      <div class="state-card">
+
+        <div class="loader">
+          ⏳
+        </div>
+
+        <h2>
+          Loading your orders...
+        </h2>
+
+        <p>
+          Please wait a moment.
+        </p>
+
+      </div>
+
+    }
+
+
+    @if (!loading && error) {
+
+      <div class="state-card error-state">
+
+        <div class="state-icon">
+          🔐
+        </div>
+
+        <h2>
+          Login Required
+        </h2>
+
+        <p>
+          {{ error }}
+        </p>
+
+        <a
+          routerLink="/auth"
+          class="primary-button">
+
+          Login / Register →
+
+        </a>
+
+      </div>
+
+    }
+
+
+    @if (
+      !loading &&
+      !error &&
+      orders.length === 0
+    ) {
+
+      <div class="state-card">
+
+        <div class="state-icon">
+          📦
+        </div>
+
+        <h2>
+          No Orders Yet
+        </h2>
+
+        <p>
+          You haven't placed any orders yet.
+        </p>
+
+        <a
+          routerLink="/products"
+          class="primary-button">
+
+          Start Shopping →
+
+        </a>
+
+      </div>
+
+    }
+
+
+    @if (
+      !loading &&
+      !error &&
+      orders.length > 0
+    ) {
+
+      <div class="orders-list">
+
+        @for (
+          order of orders;
+          track trackByOrder($index, order)
+        ) {
+
+          <article class="order-card">
+
+            <div class="order-top">
+
+              <div>
+
+                <span class="order-label">
+                  ORDER ID
+                </span>
+
+                <h2>
+                  #{{ order.id }}
+                </h2>
+
+              </div>
+
+
+              <span
+                class="status"
+                [class]="getStatusClass(order.status)">
+
+                {{ order.status }}
+
+              </span>
+
+            </div>
+
+
+            <div class="order-info">
+
+              <div>
+
+                <span>
+                  ORDER DATE
+                </span>
+
+                <strong>
+                  {{ formatDate(order.created_at) }}
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  PAYMENT
+                </span>
+
+                <strong>
+                  {{ order.payment_method || 'COD' }}
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  TOTAL
+                </span>
+
+                <strong>
+                  ₹{{ order.total_amount | number }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            @if (order.items?.length) {
+
+              <div class="order-items">
+
+                @for (
+                  item of order.items;
+                  track $index
+                ) {
+
+                  <div class="order-item">
+
+                    @if (item.image) {
+
+                      <img
+                        [src]="item.image"
+                        [alt]="item.name">
+
+                    } @else {
+
+                      <div class="item-placeholder">
+                        🛍️
+                      </div>
+
+                    }
+
+
+                    <div class="item-details">
+
+                      <h3>
+                        {{ item.name }}
+                      </h3>
+
+                      <span>
+                        Qty: {{ item.quantity }}
+                      </span>
+
+                    </div>
+
+
+                    <strong>
+                      ₹{{
+                        item.price * item.quantity
+                        | number
+                      }}
+                    </strong>
+
+                  </div>
+
+                }
+
+              </div>
+
+            }
+
+
+            <div class="order-bottom">
+
+              <span>
+                Delivery: {{ order.shipping_address }}
+              </span>
+
+              <strong>
+                ₹{{ order.total_amount | number }}
+              </strong>
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

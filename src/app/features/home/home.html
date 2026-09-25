@@ -1,0 +1,226 @@
+<section class="home-page">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <span class="eyebrow">
+        INDIA'S SMART SHOPPING DESTINATION
+      </span>
+
+      <h1>
+        Everything You Need.
+        <span>One Smart Store.</span>
+      </h1>
+
+      <p>
+        Discover thousands of products across electronics,
+        fashion, beauty, home, lifestyle and more.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a
+          routerLink="/products"
+          class="primary-btn">
+
+          Shop Now
+          <span>→</span>
+
+        </a>
+
+        <a
+          routerLink="/categories"
+          class="secondary-btn">
+
+          Explore Categories
+
+        </a>
+
+      </div>
+
+      <div class="hero-stats">
+
+        <div>
+          <strong>50K+</strong>
+          <span>Products</span>
+        </div>
+
+        <div>
+          <strong>10K+</strong>
+          <span>Customers</span>
+        </div>
+
+        <div>
+          <strong>4.8★</strong>
+          <span>Customer Rating</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+      <div class="floating-card card-one">
+        📱
+        <span>Latest Mobiles</span>
+      </div>
+
+      <div class="floating-card card-two">
+        🎧
+        <span>Premium Audio</span>
+      </div>
+
+      <div class="hero-product">
+
+        <span class="sale-label">
+          MEGA SALE
+        </span>
+
+        <strong>
+          UP TO
+          <b>70%</b>
+          OFF
+        </strong>
+
+        <p>
+          On selected products
+        </p>
+
+        <a routerLink="/products">
+          Shop Deals →
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CATEGORIES -->
+
+  <section class="categories-section">
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="eyebrow">
+          SHOP BY CATEGORY
+        </span>
+
+        <h2>
+          Explore Everything
+        </h2>
+
+      </div>
+
+      <a routerLink="/categories">
+        View All →
+      </a>
+
+    </div>
+
+
+    <div class="category-grid">
+
+      @for (
+        category of categories;
+        track category.name
+      ) {
+
+        <a
+          routerLink="/products"
+          class="category-card">
+
+          <div class="category-icon">
+            {{ category.icon }}
+          </div>
+
+          <h3>
+            {{ category.name }}
+          </h3>
+
+          <p>
+            {{ category.description }}
+          </p>
+
+          <span>
+            Explore →
+          </span>
+
+        </a>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- FEATURES -->
+
+  <section class="features-section">
+
+    @for (
+      feature of features;
+      track feature.title
+    ) {
+
+      <div class="feature-card">
+
+        <div class="feature-icon">
+          {{ feature.icon }}
+        </div>
+
+        <div>
+
+          <h3>
+            {{ feature.title }}
+          </h3>
+
+          <p>
+            {{ feature.description }}
+          </p>
+
+        </div>
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="home-cta">
+
+    <div>
+
+      <span>
+        SHOPNEST DEALS
+      </span>
+
+      <h2>
+        Find something you'll love.
+      </h2>
+
+      <p>
+        Explore trending products and exclusive deals.
+      </p>
+
+    </div>
+
+    <a routerLink="/products">
+      Start Shopping →
+    </a>
+
+  </section>
+
+</section>

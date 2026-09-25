@@ -1,0 +1,305 @@
+<header class="navbar">
+
+  <!-- ================================
+       TOP NAVBAR
+  ================================= -->
+
+  <div class="nav-main">
+
+    <div class="nav-container">
+
+
+      <!-- LOGO -->
+
+      <a
+        routerLink="/"
+        class="brand"
+        aria-label="ShopNest Home"
+      >
+
+        <div class="brand-icon">
+          S
+        </div>
+
+        <div class="brand-content">
+
+          <span class="brand-name">
+            ShopNest
+          </span>
+
+          <span class="brand-tagline">
+            Smart Shopping
+          </span>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- ================================
+           SEARCH
+      ================================= -->
+
+      <form
+        class="search-wrapper"
+        (submit)="searchProducts($event)"
+      >
+
+        <span class="search-icon">
+          🔍
+        </span>
+
+
+        <input
+          type="search"
+          [value]="searchText"
+          (input)="onSearchInput($event)"
+          placeholder="Search for products, brands and more..."
+          aria-label="Search products"
+        />
+
+
+        <button
+          type="submit"
+          class="search-button"
+        >
+          Search
+        </button>
+
+      </form>
+
+
+
+      <!-- ================================
+           ACTIONS
+      ================================= -->
+
+      <div class="nav-actions">
+
+
+        <!-- ACCOUNT -->
+
+        <a
+          routerLink="/login"
+          class="account-action"
+        >
+
+          <span class="action-icon">
+            👤
+          </span>
+
+
+          <span class="action-content">
+
+            <small>
+              Hello, Sign in
+            </small>
+
+            <strong>
+              Account
+            </strong>
+
+          </span>
+
+        </a>
+
+
+
+        <!-- WISHLIST -->
+
+        <a
+          routerLink="/wishlist"
+          class="wishlist-action"
+          aria-label="Wishlist"
+        >
+
+          <span class="heart">
+            {{ wishlistCount > 0 ? '♥' : '♡' }}
+          </span>
+
+          <span class="action-label">
+            Wishlist
+          </span>
+
+        </a>
+
+
+
+        <!-- CART -->
+
+        <a
+          routerLink="/cart"
+          class="cart-action"
+          aria-label="Shopping cart"
+        >
+
+          <span class="cart-icon">
+            🛒
+          </span>
+
+
+          @if (cartCount > 0) {
+
+            <span class="cart-badge">
+              {{ cartCount }}
+            </span>
+
+          }
+
+
+          <span class="action-content">
+
+            <small>
+              My
+            </small>
+
+            <strong>
+              Cart
+            </strong>
+
+          </span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ================================
+       CATEGORY NAVIGATION
+  ================================= -->
+
+  <div class="category-bar">
+
+    <div class="category-container">
+
+
+      <!-- ALL -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'all' }"
+        class="category-all"
+      >
+
+        <span>
+          ☰
+        </span>
+
+        All
+
+      </a>
+
+
+
+      <!-- MOBILES -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Mobiles' }"
+      >
+        Mobiles
+      </a>
+
+
+
+      <!-- FASHION -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Fashion' }"
+      >
+        Fashion
+      </a>
+
+
+
+      <!-- ELECTRONICS -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Electronics' }"
+      >
+        Electronics
+      </a>
+
+
+
+      <!-- HOME -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Home & Kitchen' }"
+      >
+        Home & Kitchen
+      </a>
+
+
+
+      <!-- BEAUTY -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Beauty' }"
+      >
+        Beauty
+      </a>
+
+
+
+      <!-- GROCERY -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Grocery' }"
+      >
+        Grocery
+      </a>
+
+
+
+      <!-- SPORTS -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Sports' }"
+      >
+        Sports
+      </a>
+
+
+
+      <!-- ACCESSORIES -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ category: 'Accessories' }"
+      >
+        Accessories
+      </a>
+
+
+
+      <!-- DEALS -->
+
+      <a
+        routerLink="/products"
+        [queryParams]="{ deal: 'true' }"
+        class="deals"
+      >
+
+        🔥 Today's Deals
+
+      </a>
+
+
+    </div>
+
+  </div>
+
+</header>

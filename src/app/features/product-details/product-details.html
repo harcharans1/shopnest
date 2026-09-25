@@ -1,0 +1,426 @@
+<section class="details-page">
+
+  <div class="details-container">
+
+    @if (product) {
+
+      <!-- =========================================
+           BREADCRUMB
+      ========================================== -->
+
+      <div class="breadcrumb">
+
+        <a routerLink="/">
+          Home
+        </a>
+
+        <span>›</span>
+
+        <a routerLink="/products">
+          Products
+        </a>
+
+        <span>›</span>
+
+        <strong>
+          {{ product.name }}
+        </strong>
+
+      </div>
+
+
+      <!-- =========================================
+           PRODUCT DETAILS
+      ========================================== -->
+
+      <div class="product-details">
+
+
+        <!-- =======================================
+             PRODUCT IMAGE
+        ======================================== -->
+
+        <div class="details-image">
+
+          @if (product.badge) {
+
+            <span class="details-badge">
+              {{ product.badge }}
+            </span>
+
+          }
+
+
+          <img
+            [src]="product.image"
+            [alt]="product.name"
+          >
+
+
+          <!-- IMAGE WISHLIST -->
+
+          <button
+            class="image-wishlist"
+            type="button"
+            (click)="toggleWishlist()"
+            [attr.aria-label]="
+              isInWishlist()
+                ? 'Remove from wishlist'
+                : 'Add to wishlist'
+            "
+          >
+
+            {{ isInWishlist() ? '♥' : '♡' }}
+
+          </button>
+
+        </div>
+
+
+
+        <!-- =======================================
+             PRODUCT INFORMATION
+        ======================================== -->
+
+        <div class="details-info">
+
+
+          <!-- CATEGORY -->
+
+          <span class="category">
+            {{ product.category }}
+          </span>
+
+
+          <!-- NAME -->
+
+          <h1>
+            {{ product.name }}
+          </h1>
+
+
+          <!-- RATING -->
+
+          <div class="rating">
+
+            <span>
+              ★ {{ product.rating }}
+            </span>
+
+            <small>
+              {{ product.reviews }} Reviews
+            </small>
+
+          </div>
+
+
+
+          <!-- PRICE -->
+
+          <div class="price">
+
+            <strong>
+              ₹{{ product.price | number }}
+            </strong>
+
+
+            @if (product.oldPrice) {
+
+              <del>
+                ₹{{ product.oldPrice | number }}
+              </del>
+
+            }
+
+
+            @if (product.discount) {
+
+              <span>
+                {{ product.discount }}% OFF
+              </span>
+
+            }
+
+          </div>
+
+
+
+          <!-- DESCRIPTION -->
+
+          <p class="description">
+            {{ product.description }}
+          </p>
+
+
+
+          <!-- =====================================
+               STOCK
+          ====================================== -->
+
+          <div class="stock">
+
+            @if (product.inStock) {
+
+              <span class="in-stock">
+                ● In Stock
+              </span>
+
+              <small>
+                Ready to ship
+              </small>
+
+            } @else {
+
+              <span class="out-stock">
+                ● Out of Stock
+              </span>
+
+            }
+
+          </div>
+
+
+
+          <!-- =====================================
+               COLOR
+          ====================================== -->
+
+          @if (product.colors?.length) {
+
+            <div class="option">
+
+              <div class="option-heading">
+
+                <strong>
+                  Color:
+                </strong>
+
+                <span>
+                  {{ selectedColor }}
+                </span>
+
+              </div>
+
+
+              <div class="colors">
+
+                @for (
+                  color of product.colors;
+                  track color
+                ) {
+
+                  <button
+                    type="button"
+                    [class.active]="
+                      selectedColor === color
+                    "
+                    (click)="
+                      selectColor(color)
+                    "
+                  >
+
+                    {{ color }}
+
+                  </button>
+
+                }
+
+              </div>
+
+            </div>
+
+          }
+
+
+
+          <!-- =====================================
+               QUANTITY
+          ====================================== -->
+
+          <div class="quantity-section">
+
+            <strong>
+              Quantity
+            </strong>
+
+
+            <div class="quantity">
+
+              <button
+                type="button"
+                aria-label="Decrease quantity"
+                (click)="decreaseQuantity()"
+              >
+
+                −
+
+              </button>
+
+
+              <span>
+                {{ quantity }}
+              </span>
+
+
+              <button
+                type="button"
+                aria-label="Increase quantity"
+                (click)="increaseQuantity()"
+              >
+
+                +
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =====================================
+               ACTIONS
+          ====================================== -->
+
+          <div class="actions">
+
+
+            <!-- ADD CART -->
+
+            <button
+              class="add-cart"
+              type="button"
+              [disabled]="!product.inStock"
+              (click)="addToCart()"
+            >
+
+              🛒 Add to Cart
+
+            </button>
+
+
+
+            <!-- BUY NOW -->
+
+            <button
+              class="buy-now"
+              type="button"
+              [disabled]="!product.inStock"
+            >
+
+              Buy Now →
+
+            </button>
+
+          </div>
+
+
+
+          <!-- =====================================
+               WISHLIST
+          ====================================== -->
+
+          <button
+            class="wishlist-button"
+            type="button"
+            (click)="toggleWishlist()"
+          >
+
+            @if (isInWishlist()) {
+
+              ♥ Remove from Wishlist
+
+            } @else {
+
+              ♡ Add to Wishlist
+
+            }
+
+          </button>
+
+
+
+          <!-- =====================================
+               TRUST FEATURES
+          ====================================== -->
+
+          <div class="trust">
+
+
+            <div>
+
+              <span class="trust-icon">
+                🚚
+              </span>
+
+              <span>
+                Fast Delivery
+              </span>
+
+            </div>
+
+
+            <div>
+
+              <span class="trust-icon">
+                🔒
+              </span>
+
+              <span>
+                Secure Payment
+              </span>
+
+            </div>
+
+
+            <div>
+
+              <span class="trust-icon">
+                ↩️
+              </span>
+
+              <span>
+                Easy Returns
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    } @else {
+
+
+      <!-- =========================================
+           PRODUCT NOT FOUND
+      ========================================== -->
+
+      <div class="not-found">
+
+        <div>
+          🔎
+        </div>
+
+        <h1>
+          Product Not Found
+        </h1>
+
+        <p>
+          This product may have been removed.
+        </p>
+
+        <a routerLink="/products">
+          Back to Products →
+        </a>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

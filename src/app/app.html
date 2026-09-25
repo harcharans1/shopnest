@@ -1,11 +1,21 @@
-@if (!isAdminPage()) {
+<div class="app-shell">
+
+  <!-- GLOBAL NAVBAR -->
+
   <app-navbar></app-navbar>
-}
 
-<main class="app-content">
-  <router-outlet></router-outlet>
-</main>
 
-@if (!isAdminPage()) {
+  <!-- MAIN APPLICATION -->
+
+  <main class="main-content">
+
+    <router-outlet></router-outlet>
+
+  </main>
+
+
+  <!-- GLOBAL FOOTER -->
+
   <app-footer></app-footer>
-}
+
+</div>

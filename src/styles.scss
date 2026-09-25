@@ -1,0 +1,865 @@
+/* =========================================================
+   SHOPNEST
+   GLOBAL STYLES
+   ========================================================= */
+
+
+/* =========================
+   ROOT VARIABLES
+   ========================= */
+
+:root {
+
+  --primary: #6c3bff;
+  --primary-dark: #5424e8;
+  --primary-light: #9270ff;
+
+  --secondary: #ff7a18;
+
+  --dark: #171525;
+  --dark-2: #252338;
+
+  --text: #30303b;
+  --text-light: #777887;
+  --text-muted: #9b9aa7;
+
+  --white: #ffffff;
+
+  --background: #f7f7fb;
+  --surface: #ffffff;
+
+  --border: #e8e7ee;
+
+  --success: #159957;
+  --danger: #e53935;
+  --warning: #f5a623;
+
+  --shadow-sm:
+    0 4px 15px
+    rgba(20, 15, 40, 0.05);
+
+  --shadow-md:
+    0 10px 35px
+    rgba(20, 15, 40, 0.08);
+
+  --shadow-lg:
+    0 20px 60px
+    rgba(20, 15, 40, 0.12);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+}
+
+
+/* =========================
+   RESET
+   ========================= */
+
+* {
+
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+}
+
+
+/* =========================
+   HTML
+   ========================= */
+
+html {
+
+  scroll-behavior: smooth;
+
+  font-size: 16px;
+
+}
+
+
+/* =========================
+   BODY
+   ========================= */
+
+body {
+
+  min-height: 100vh;
+
+  margin: 0;
+
+  background: var(--background);
+
+  color: var(--text);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  line-height: 1.5;
+
+  -webkit-font-smoothing: antialiased;
+
+  text-rendering: optimizeLegibility;
+
+}
+
+
+/* =========================
+   APP ROOT
+   ========================= */
+
+app-root {
+
+  display: block;
+
+  min-height: 100vh;
+
+}
+
+
+/* =========================
+   LINKS
+   ========================= */
+
+a {
+
+  color: inherit;
+
+  text-decoration: none;
+
+}
+
+
+/* =========================
+   BUTTON
+   ========================= */
+
+button {
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  border: none;
+
+}
+
+
+/* =========================
+   INPUTS
+   ========================= */
+
+input,
+textarea,
+select {
+
+  font-family: inherit;
+
+}
+
+
+/* =========================
+   IMAGES
+   ========================= */
+
+img {
+
+  display: block;
+
+  max-width: 100%;
+
+}
+
+
+/* =========================
+   LISTS
+   ========================= */
+
+ul,
+ol {
+
+  list-style: none;
+
+}
+
+
+/* =========================
+   SELECTION
+   ========================= */
+
+::selection {
+
+  background: var(--primary);
+
+  color: var(--white);
+
+}
+
+
+/* =========================
+   SCROLLBAR
+   ========================= */
+
+::-webkit-scrollbar {
+
+  width: 8px;
+
+  height: 8px;
+
+}
+
+
+::-webkit-scrollbar-track {
+
+  background: #f0eff5;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+  background: #c5c2d1;
+
+  border-radius: 20px;
+
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+  background: var(--primary);
+
+}
+
+
+/* =========================
+   CONTAINER
+   ========================= */
+
+.container {
+
+  width: min(
+    1400px,
+    92%
+  );
+
+  margin: 0 auto;
+
+}
+
+
+/* =========================
+   SECTION
+   ========================= */
+
+.section {
+
+  padding: 80px 0;
+
+}
+
+
+.section-sm {
+
+  padding: 50px 0;
+
+}
+
+
+/* =========================
+   SECTION HEADER
+   ========================= */
+
+.section-header {
+
+  margin-bottom: 40px;
+
+}
+
+
+.section-header .eyebrow {
+
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  color: var(--primary);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+
+}
+
+
+.section-header h2 {
+
+  margin: 0;
+
+  color: var(--dark);
+
+  font-size: clamp(
+    28px,
+    4vw,
+    46px
+  );
+
+  line-height: 1.1;
+
+  letter-spacing: -1.5px;
+
+}
+
+
+.section-header p {
+
+  max-width: 650px;
+
+  margin-top: 14px;
+
+  color: var(--text-light);
+
+  font-size: 15px;
+
+}
+
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 46px;
+
+  padding: 0 22px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+
+}
+
+
+.btn:hover {
+
+  transform: translateY(-2px);
+
+}
+
+
+.btn-primary {
+
+  background: var(--primary);
+
+  color: white;
+
+  box-shadow:
+    0 8px 20px
+    rgba(108, 59, 255, 0.22);
+
+}
+
+
+.btn-primary:hover {
+
+  background: var(--primary-dark);
+
+}
+
+
+.btn-secondary {
+
+  background: var(--dark);
+
+  color: white;
+
+}
+
+
+.btn-outline {
+
+  background: white;
+
+  color: var(--dark);
+
+  border:
+    1px solid var(--border);
+
+}
+
+
+.btn-outline:hover {
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+}
+
+
+/* =========================
+   CARDS
+   ========================= */
+
+.card {
+
+  background: var(--surface);
+
+  border:
+    1px solid var(--border);
+
+  border-radius: var(--radius-md);
+
+  box-shadow: var(--shadow-sm);
+
+}
+
+
+/* =========================
+   BADGE
+   ========================= */
+
+.badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 5px 10px;
+
+  border-radius: 30px;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+}
+
+
+.badge-primary {
+
+  background:
+    rgba(108, 59, 255, 0.1);
+
+  color: var(--primary);
+
+}
+
+
+.badge-success {
+
+  background:
+    rgba(21, 153, 87, 0.1);
+
+  color: var(--success);
+
+}
+
+
+.badge-danger {
+
+  background:
+    rgba(229, 57, 53, 0.1);
+
+  color: var(--danger);
+
+}
+
+
+/* =========================
+   FORM ELEMENTS
+   ========================= */
+
+.form-group {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+}
+
+
+.form-group label {
+
+  color: var(--dark);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+
+.form-control {
+
+  width: 100%;
+
+  min-height: 46px;
+
+  padding: 0 14px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: white;
+
+  color: var(--dark);
+
+  font-size: 13px;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease;
+
+}
+
+
+.form-control:focus {
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(108, 59, 255, 0.08);
+
+}
+
+
+/* =========================
+   GRID
+   ========================= */
+
+.grid {
+
+  display: grid;
+
+  gap: 24px;
+
+}
+
+
+.grid-2 {
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+}
+
+
+.grid-3 {
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+}
+
+
+.grid-4 {
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+}
+
+
+.grid-5 {
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+}
+
+
+/* =========================
+   FLEX UTILITIES
+   ========================= */
+
+.flex {
+
+  display: flex;
+
+}
+
+
+.flex-center {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+
+.flex-between {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+
+/* =========================
+   TEXT UTILITIES
+   ========================= */
+
+.text-center {
+
+  text-align: center;
+
+}
+
+
+.text-primary {
+
+  color: var(--primary);
+
+}
+
+
+.text-muted {
+
+  color: var(--text-muted);
+
+}
+
+
+.text-success {
+
+  color: var(--success);
+
+}
+
+
+.text-danger {
+
+  color: var(--danger);
+
+}
+
+
+/* =========================
+   HIDE
+   ========================= */
+
+.hidden {
+
+  display: none !important;
+
+}
+
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+
+@keyframes fadeIn {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(10px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+
+@keyframes fadeInScale {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      scale(0.97);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      scale(1);
+
+  }
+
+}
+
+
+@keyframes slideUp {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(25px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+
+/* =========================
+   PAGE ANIMATION
+   ========================= */
+
+.page-animation {
+
+  animation:
+    fadeIn 0.4s ease
+    both;
+
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1200px) {
+
+  .grid-5 {
+
+    grid-template-columns:
+      repeat(4, 1fr);
+
+  }
+
+}
+
+
+@media (max-width: 992px) {
+
+  .section {
+
+    padding: 65px 0;
+
+  }
+
+  .grid-4,
+  .grid-5 {
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .section {
+
+    padding: 50px 0;
+
+  }
+
+  .grid-3,
+  .grid-4,
+  .grid-5 {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+}
+
+
+@media (max-width: 576px) {
+
+  html {
+
+    font-size: 15px;
+
+  }
+
+  .container {
+
+    width: 94%;
+
+  }
+
+  .section {
+
+    padding: 40px 0;
+
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-5 {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+}

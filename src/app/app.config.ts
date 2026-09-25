@@ -1,38 +1,27 @@
 import {
-  ApplicationConfig,
-  provideBrowserGlobalErrorListeners
+  ApplicationConfig
 } from '@angular/core';
 
 import {
-  provideRouter,
-  withInMemoryScrolling
+  provideRouter
 } from '@angular/router';
 
-import { routes } from './app.routes';
+import {
+  provideHttpClient
+} from '@angular/common/http';
 
 import {
-  provideClientHydration,
-  withEventReplay
-} from '@angular/platform-browser';
+  routes
+} from './app.routes';
 
 
 export const appConfig: ApplicationConfig = {
 
   providers: [
 
-    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes),
 
-    provideRouter(
-      routes,
-      withInMemoryScrolling({
-        scrollPositionRestoration: 'top',
-        anchorScrolling: 'enabled'
-      })
-    ),
-
-    provideClientHydration(
-      withEventReplay()
-    )
+    provideHttpClient()
 
   ]
 

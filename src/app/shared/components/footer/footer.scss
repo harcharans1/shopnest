@@ -1,0 +1,671 @@
+/* =========================================
+   SHOPNEST FOOTER
+   ========================================= */
+
+.footer {
+
+  margin-top: auto;
+
+  color: #ffffff;
+
+}
+
+
+/* =========================================
+   CONTAINER
+   ========================================= */
+
+.footer-container {
+
+  width: min(
+    1400px,
+    92%
+  );
+
+  margin: 0 auto;
+
+}
+
+
+/* =========================================
+   NEWSLETTER
+   ========================================= */
+
+.newsletter {
+
+  background:
+    linear-gradient(
+      135deg,
+      #6c3bff,
+      #5424e8
+    );
+
+}
+
+
+.newsletter-inner {
+
+  min-height: 120px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+}
+
+
+.newsletter-content {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+}
+
+
+.newsletter-icon {
+
+  width: 45px;
+
+  height: 45px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 12px;
+
+  background:
+    rgba(255,255,255,0.14);
+
+  font-size: 20px;
+
+}
+
+
+.newsletter-content h3 {
+
+  margin: 0 0 4px;
+
+  font-size: 20px;
+
+  font-weight: 800;
+
+}
+
+
+.newsletter-content p {
+
+  margin: 0;
+
+  color:
+    rgba(255,255,255,0.78);
+
+  font-size: 11px;
+
+}
+
+
+.newsletter-form {
+
+  display: flex;
+
+  width: min(
+    420px,
+    100%
+  );
+
+  height: 45px;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+}
+
+
+.newsletter-form input {
+
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 0 15px;
+
+  border: 0;
+
+  outline: 0;
+
+  color: #171525;
+
+  font-size: 11px;
+
+}
+
+
+.newsletter-form button {
+
+  padding: 0 18px;
+
+  border: 0;
+
+  background: #171525;
+
+  color: #ffffff;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+}
+
+
+/* =========================================
+   MAIN FOOTER
+   ========================================= */
+
+.footer-main {
+
+  background: #171525;
+
+}
+
+
+.footer-grid {
+
+  padding: 65px 0;
+
+  display: grid;
+
+  grid-template-columns:
+    1.5fr
+    1fr
+    1fr
+    1fr
+    1.2fr;
+
+  gap: 40px;
+
+}
+
+
+/* =========================================
+   FOOTER BRAND
+   ========================================= */
+
+.footer-logo {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+
+.footer-logo-icon {
+
+  width: 39px;
+
+  height: 39px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6c3bff,
+      #9270ff
+    );
+
+  color: #ffffff;
+
+  font-weight: 900;
+
+}
+
+
+.footer-logo-name {
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  font-weight: 900;
+
+}
+
+
+.footer-brand > p {
+
+  max-width: 280px;
+
+  margin: 18px 0;
+
+  color: #9997a8;
+
+  font-size: 11px;
+
+  line-height: 1.8;
+
+}
+
+
+/* =========================================
+   SOCIAL
+   ========================================= */
+
+.social-links {
+
+  display: flex;
+
+  gap: 8px;
+
+}
+
+
+.social-links a {
+
+  width: 31px;
+
+  height: 31px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid #373446;
+
+  border-radius: 8px;
+
+  color: #b8b5c3;
+
+  font-size: 12px;
+
+  transition:
+    0.2s ease;
+
+}
+
+
+.social-links a:hover {
+
+  border-color: #6c3bff;
+
+  background: #6c3bff;
+
+  color: #ffffff;
+
+}
+
+
+/* =========================================
+   FOOTER COLUMNS
+   ========================================= */
+
+.footer-column {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+}
+
+
+.footer-column h4 {
+
+  margin: 0 0 18px;
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+}
+
+
+.footer-column > a {
+
+  margin-bottom: 10px;
+
+  color: #9997a8;
+
+  font-size: 10px;
+
+  transition:
+    0.2s ease;
+
+}
+
+
+.footer-column > a:hover {
+
+  color: #ffffff;
+
+  transform:
+    translateX(3px);
+
+}
+
+
+/* =========================================
+   CONTACT
+   ========================================= */
+
+.contact-item {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-bottom: 13px;
+
+}
+
+
+.contact-item span {
+
+  font-size: 13px;
+
+}
+
+
+.contact-item p {
+
+  margin: 0;
+
+  color: #9997a8;
+
+  font-size: 10px;
+
+  line-height: 1.5;
+
+}
+
+
+/* =========================================
+   TRUST BAR
+   ========================================= */
+
+.trust-bar {
+
+  background: #211f30;
+
+  border-top:
+    1px solid #302d40;
+
+  border-bottom:
+    1px solid #302d40;
+
+}
+
+
+.trust-grid {
+
+  min-height: 82px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 20px;
+
+  align-items: center;
+
+}
+
+
+.trust-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+
+.trust-item > span {
+
+  width: 34px;
+
+  height: 34px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 9px;
+
+  background:
+    rgba(108,59,255,0.15);
+
+  font-size: 14px;
+
+}
+
+
+.trust-item div {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+
+.trust-item strong {
+
+  color: #ffffff;
+
+  font-size: 10px;
+
+}
+
+
+.trust-item small {
+
+  margin-top: 2px;
+
+  color: #777587;
+
+  font-size: 8px;
+
+}
+
+
+/* =========================================
+   BOTTOM
+   ========================================= */
+
+.footer-bottom {
+
+  background: #12111c;
+
+}
+
+
+.footer-bottom-inner {
+
+  min-height: 55px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+}
+
+
+.footer-bottom p {
+
+  margin: 0;
+
+  color: #777587;
+
+  font-size: 9px;
+
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+  .footer-grid {
+
+    grid-template-columns:
+      repeat(3, 1fr);
+
+  }
+
+  .footer-brand {
+
+    grid-column:
+      1 / -1;
+
+  }
+
+  .trust-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    padding: 20px 0;
+
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+  .newsletter-inner {
+
+    padding: 30px 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+  }
+
+
+  .newsletter-form {
+
+    width: 100%;
+
+  }
+
+
+  .footer-grid {
+
+    padding: 45px 0;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 35px 25px;
+
+  }
+
+
+  .footer-brand {
+
+    grid-column:
+      1 / -1;
+
+  }
+
+
+  .trust-grid {
+
+    grid-template-columns:
+      1fr;
+
+    gap: 18px;
+
+    padding: 25px 0;
+
+  }
+
+
+  .footer-bottom-inner {
+
+    min-height: 70px;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 420px) {
+
+  .footer-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .footer-brand {
+
+    grid-column:
+      auto;
+
+  }
+
+
+  .newsletter-content {
+
+    align-items: flex-start;
+
+  }
+
+
+  .newsletter-content h3 {
+
+    font-size: 17px;
+
+  }
+
+}

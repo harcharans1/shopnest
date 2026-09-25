@@ -1,0 +1,247 @@
+<section class="products-page">
+
+  <div class="products-container">
+
+    <!-- HEADER -->
+
+    <div class="products-header">
+
+      <div>
+
+        <span class="eyebrow">
+          SHOPNEST STORE
+        </span>
+
+        <h1>
+          Explore Products
+        </h1>
+
+        <p>
+          Discover products picked for your everyday needs.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- FILTER BAR -->
+
+    <div class="filter-bar">
+
+      <div class="categories">
+
+        @for (
+          category of categories;
+          track category
+        ) {
+
+          <button
+            [class.active]="
+              selectedCategory === category
+            "
+            (click)="filterCategory(category)">
+
+            {{ category }}
+
+          </button>
+
+        }
+
+      </div>
+
+
+      <div class="sort-box">
+
+        <select
+          [(ngModel)]="sortOption"
+          (change)="sortProducts()">
+
+          <option value="default">
+            Sort: Featured
+          </option>
+
+          <option value="low">
+            Price: Low to High
+          </option>
+
+          <option value="high">
+            Price: High to Low
+          </option>
+
+          <option value="rating">
+            Customer Rating
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- RESULT -->
+
+    <div class="result-info">
+
+      <span>
+        {{ filteredProducts.length }}
+        products found
+      </span>
+
+      @if (selectedCategory !== 'All') {
+
+        <strong>
+          {{ selectedCategory }}
+        </strong>
+
+      }
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    @if (filteredProducts.length > 0) {
+
+      <div class="products-grid">
+
+        @for (
+          product of filteredProducts;
+          track trackProduct($index, product)
+        ) {
+
+          <article class="product-card">
+
+            <a
+              [routerLink]="[
+                '/products',
+                product.id
+              ]"
+              class="product-image">
+
+              @if (product.badge) {
+
+                <span class="badge">
+                  {{ product.badge }}
+                </span>
+
+              }
+
+              <img
+                [src]="product.image"
+                [alt]="product.name">
+
+              <button
+                class="wishlist"
+                type="button"
+                (click)="$event.preventDefault()">
+
+                ♡
+
+              </button>
+
+            </a>
+
+
+            <div class="product-content">
+
+              <span class="product-category">
+                {{ product.category }}
+              </span>
+
+              <h2>
+                {{ product.name }}
+              </h2>
+
+              <div class="rating">
+
+                <span>
+                  ★ {{ product.rating }}
+                </span>
+
+                <small>
+                  ({{ product.reviews }})
+                </small>
+
+              </div>
+
+
+              <div class="price-row">
+
+                <div>
+
+                  <strong>
+                    ₹{{ product.price | number }}
+                  </strong>
+
+                  @if (product.oldPrice) {
+
+                    <del>
+                      ₹{{ product.oldPrice | number }}
+                    </del>
+
+                  }
+
+                </div>
+
+                @if (product.discount) {
+
+                  <span class="discount">
+                    {{ product.discount }}% OFF
+                  </span>
+
+                }
+
+              </div>
+
+
+              <a
+                [routerLink]="[
+                  '/products',
+                  product.id
+                ]"
+                class="view-button">
+
+                View Product →
+
+              </a>
+
+            </div>
+
+          </article>
+
+        }
+
+      </div>
+
+    } @else {
+
+      <div class="empty-products">
+
+        <div>
+          🔎
+        </div>
+
+        <h2>
+          No Products Found
+        </h2>
+
+        <p>
+          Try another search or category.
+        </p>
+
+        <button
+          (click)="filterCategory('All')">
+
+          View All Products
+
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

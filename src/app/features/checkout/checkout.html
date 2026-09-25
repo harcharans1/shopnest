@@ -1,0 +1,387 @@
+<section class="checkout-page">
+
+  <div class="checkout-container">
+
+    <header class="checkout-header">
+
+      <span class="eyebrow">
+        SHOPNEST CHECKOUT
+      </span>
+
+      <h1>
+        Secure Checkout
+      </h1>
+
+      <p>
+        Complete your delivery details and place your order.
+      </p>
+
+    </header>
+
+
+    @if (error) {
+
+      <div class="message error">
+        {{ error }}
+      </div>
+
+    }
+
+
+    @if (success) {
+
+      <div class="message success">
+        {{ success }}
+      </div>
+
+    }
+
+
+    @if (cart.length === 0) {
+
+      <div class="empty-checkout">
+
+        <div>
+          🛒
+        </div>
+
+        <h2>
+          Your cart is empty
+        </h2>
+
+        <p>
+          Add products before proceeding to checkout.
+        </p>
+
+        <a
+          routerLink="/products">
+
+          Continue Shopping →
+
+        </a>
+
+      </div>
+
+    } @else {
+
+      <div class="checkout-layout">
+
+
+        <!-- DELIVERY -->
+
+        <form
+          class="checkout-form"
+          (ngSubmit)="placeOrder()">
+
+          <div class="form-card">
+
+            <div class="card-heading">
+
+              <span>
+                01
+              </span>
+
+              <div>
+
+                <h2>
+                  Delivery Details
+                </h2>
+
+                <p>
+                  Where should we deliver your order?
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+              <label>
+
+                Full Name
+
+                <input
+                  type="text"
+                  name="fullName"
+                  [(ngModel)]="customer.fullName"
+                  placeholder="Enter your full name">
+
+              </label>
+
+
+              <label>
+
+                Phone Number
+
+                <input
+                  type="tel"
+                  name="phone"
+                  [(ngModel)]="customer.phone"
+                  placeholder="10-digit mobile number">
+
+              </label>
+
+
+              <label class="full">
+
+                Address
+
+                <textarea
+                  name="address"
+                  [(ngModel)]="customer.address"
+                  placeholder="House no, street, area..."
+                  rows="3">
+                </textarea>
+
+              </label>
+
+
+              <label>
+
+                City
+
+                <input
+                  type="text"
+                  name="city"
+                  [(ngModel)]="customer.city"
+                  placeholder="City">
+
+              </label>
+
+
+              <label>
+
+                State
+
+                <input
+                  type="text"
+                  name="state"
+                  [(ngModel)]="customer.state"
+                  placeholder="State">
+
+              </label>
+
+
+              <label>
+
+                Pincode
+
+                <input
+                  type="text"
+                  name="pincode"
+                  [(ngModel)]="customer.pincode"
+                  placeholder="6-digit pincode">
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-card">
+
+            <div class="card-heading">
+
+              <span>
+                02
+              </span>
+
+              <div>
+
+                <h2>
+                  Payment Method
+                </h2>
+
+                <p>
+                  Choose your preferred payment method.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <label class="payment-option">
+
+              <input
+                type="radio"
+                name="payment"
+                value="cod"
+                [(ngModel)]="paymentMethod">
+
+              <div>
+
+                <strong>
+                  Cash on Delivery
+                </strong>
+
+                <small>
+                  Pay when your order arrives
+                </small>
+
+              </div>
+
+            </label>
+
+
+            <label class="payment-option disabled">
+
+              <input
+                type="radio"
+                name="payment"
+                value="online"
+                disabled>
+
+              <div>
+
+                <strong>
+                  Online Payment
+                </strong>
+
+                <small>
+                  Coming soon
+                </small>
+
+              </div>
+
+            </label>
+
+          </div>
+
+
+          <button
+            class="place-order"
+            type="submit"
+            [disabled]="processing">
+
+            @if (processing) {
+
+              Placing Order...
+
+            } @else {
+
+              Place Order
+              <span>→</span>
+
+            }
+
+          </button>
+
+        </form>
+
+
+        <!-- SUMMARY -->
+
+        <aside class="order-summary">
+
+          <h2>
+            Order Summary
+          </h2>
+
+
+          <div class="summary-items">
+
+            @for (
+              item of cart;
+              track item.id
+            ) {
+
+              <div class="summary-item">
+
+                <img
+                  [src]="item.image"
+                  [alt]="item.name">
+
+                <div>
+
+                  <h3>
+                    {{ item.name }}
+                  </h3>
+
+                  <span>
+                    Qty: {{ item.quantity }}
+                  </span>
+
+                </div>
+
+                <strong>
+                  ₹{{ item.price * item.quantity | number }}
+                </strong>
+
+              </div>
+
+            }
+
+          </div>
+
+
+          <div class="summary-line">
+
+            <span>
+              Subtotal
+            </span>
+
+            <strong>
+              ₹{{ subtotal | number }}
+            </strong>
+
+          </div>
+
+
+          <div class="summary-line">
+
+            <span>
+              Delivery
+            </span>
+
+            <strong>
+
+              @if (delivery === 0) {
+
+                FREE
+
+              } @else {
+
+                ₹{{ delivery }}
+
+              }
+
+            </strong>
+
+          </div>
+
+
+          <hr>
+
+
+          <div class="total-line">
+
+            <span>
+              Total
+            </span>
+
+            <strong>
+              ₹{{ total | number }}
+            </strong>
+
+          </div>
+
+
+          <div class="secure-note">
+
+            🔒 Secure checkout
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

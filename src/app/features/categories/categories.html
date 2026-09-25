@@ -1,0 +1,102 @@
+<section class="categories-page">
+
+  <div class="categories-container">
+
+    <header class="categories-header">
+
+      <span class="eyebrow">
+        SHOPNEST CATEGORIES
+      </span>
+
+      <h1>
+        Shop by Category
+      </h1>
+
+      <p>
+        Explore thousands of products across all your
+        favourite categories.
+      </p>
+
+    </header>
+
+
+    <div class="category-grid">
+
+      @for (category of categories; track category.slug) {
+
+        <article class="category-card">
+
+          <div class="category-top">
+
+            <div class="category-icon">
+              {{ category.icon }}
+            </div>
+
+            <span class="arrow">
+              →
+            </span>
+
+          </div>
+
+
+          <h2>
+            {{ category.name }}
+          </h2>
+
+          <p>
+            {{ category.description }}
+          </p>
+
+          <span class="product-count">
+            {{ category.products }}
+          </span>
+
+
+          <a
+            [routerLink]="['/products']"
+            [queryParams]="{ category: category.slug }"
+            class="explore">
+
+            Explore Category
+
+            <span>→</span>
+
+          </a>
+
+        </article>
+
+      }
+
+    </div>
+
+
+    <section class="category-banner">
+
+      <div>
+
+        <span>
+          SHOPNEST DEALS
+        </span>
+
+        <h2>
+          Find something you'll love.
+        </h2>
+
+        <p>
+          Discover daily deals and trending products.
+        </p>
+
+      </div>
+
+      <a
+        routerLink="/products">
+
+        Explore Products →
+
+      </a>
+
+    </section>
+
+  </div>
+
+</section>

@@ -1,0 +1,189 @@
+<section class="cart-page">
+
+  <div class="cart-container">
+
+    <div class="cart-header">
+
+      <div>
+
+        <span class="eyebrow">
+          SHOPNEST
+        </span>
+
+        <h1>
+          Your Cart
+        </h1>
+
+        <p>
+          Review your selected products.
+        </p>
+
+      </div>
+
+
+      @if (cart.length > 0) {
+
+        <button
+          class="clear-btn"
+          (click)="clearCart()">
+
+          Clear Cart
+
+        </button>
+
+      }
+
+    </div>
+
+
+    @if (cart.length === 0) {
+
+      <div class="empty-cart">
+
+        <div class="empty-icon">
+          🛒
+        </div>
+
+        <h2>
+          Your cart is empty
+        </h2>
+
+        <p>
+          Add some products and they will appear here.
+        </p>
+
+        <a
+          routerLink="/products"
+          class="shop-button">
+
+          Continue Shopping →
+
+        </a>
+
+      </div>
+
+    }
+
+
+    @if (cart.length > 0) {
+
+      <div class="cart-layout">
+
+        <div class="cart-items">
+
+          @for (item of cart; track item.id) {
+
+            <article class="cart-item">
+
+              <img
+                [src]="item.image"
+                [alt]="item.name">
+
+              <div class="item-info">
+
+                <span>
+                  {{ item.category }}
+                </span>
+
+                <h3>
+                  {{ item.name }}
+                </h3>
+
+                <strong>
+                  ₹{{ item.price | number }}
+                </strong>
+
+              </div>
+
+
+              <div class="quantity">
+
+                <button
+                  (click)="decrease(item.id)">
+                  −
+                </button>
+
+                <span>
+                  {{ item.quantity }}
+                </span>
+
+                <button
+                  (click)="increase(item.id)">
+                  +
+                </button>
+
+              </div>
+
+
+              <strong class="item-total">
+
+                ₹{{ item.price * item.quantity | number }}
+
+              </strong>
+
+
+              <button
+                class="remove"
+                (click)="remove(item.id)">
+
+                ×
+
+              </button>
+
+            </article>
+
+          }
+
+        </div>
+
+
+        <aside class="summary">
+
+          <h2>
+            Order Summary
+          </h2>
+
+          <div>
+            <span>Items</span>
+            <strong>{{ totalItems }}</strong>
+          </div>
+
+          <div>
+            <span>Subtotal</span>
+            <strong>₹{{ subtotal | number }}</strong>
+          </div>
+
+          <div>
+            <span>Delivery</span>
+            <strong>FREE</strong>
+          </div>
+
+          <hr>
+
+          <div class="total">
+
+            <span>Total</span>
+
+            <strong>
+              ₹{{ subtotal | number }}
+            </strong>
+
+          </div>
+
+          <a
+            routerLink="/checkout"
+            class="checkout-button">
+
+            Proceed to Checkout →
+
+          </a>
+
+        </aside>
+
+      </div>
+
+    }
+
+  </div>
+
+</section>
